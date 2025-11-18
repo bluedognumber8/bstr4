@@ -3,64 +3,73 @@
 import { styled } from "next-yak";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Inter, Sora, Geist_Mono } from "next/font/google";
-
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const sora = Sora({
-  variable: "--font-sora",
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
-});
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { FaSearch, FaUsers, FaStar, FaTruck, FaHeadset } from "react-icons/fa";
 
 // ----- Styled Components -----
 
 const PageWrapper = styled.main`
   min-height: 100vh;
-  background: var(--surface-primary);
+  background: linear-gradient(135deg, var(--surface-primary) 0%, var(--surface-secondary) 100%);
   font-family: var(--font-inter);
+  overflow-x: hidden;
 `;
 
 const HeroSection = styled.section`
   text-align: center;
-  padding: 4rem 1rem 2rem;
+  padding: 5rem 1rem 3rem;
   max-width: 1280px;
   margin: 0 auto;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
 
   @media (min-width: 768px) {
-    padding: 6rem 1.5rem 3rem;
+    padding: 8rem 1.5rem 4rem;
   }
 `;
 
 const HeroTitle = styled.h1`
   font-family: var(--font-sora);
   font-weight: 800;
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   line-height: 1.1;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
 
   @media (min-width: 768px) {
-    font-size: 3.75rem;
+    font-size: 4rem;
   }
 
   span {
-    color: var(--text-muted);
+    background: linear-gradient(45deg, var(--action-primary), var(--action-primary-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 `;
 
 const HeroSubtitle = styled.p`
-  font-size: 1rem;
+  font-size: 1.125rem;
   color: var(--text-secondary);
   font-weight: 500;
-  margin-bottom: 1.5rem;
-  opacity: 0.85;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
 
   @media (min-width: 768px) {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
   }
 `;
 
@@ -68,28 +77,47 @@ const HeroDescription = styled.p`
   font-size: 1rem;
   color: var(--text-muted);
   max-width: 640px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
 `;
 
 const SearchContainer = styled.div`
   max-width: 768px;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 2rem;
+  position: relative;
+  z-index: 1;
+`;
+
+const SearchWrapper = styled.div`
+  position: relative;
+`;
+
+const SearchIcon = styled(FaSearch)`
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 1rem;
 `;
 
 const SearchInput = styled.input`
   width: 100%;
-  padding: 1rem 1.5rem;
+  padding: 1.25rem 1.5rem 1.25rem 3rem;
   font-size: 1rem;
-  background: var(--surface-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: 0.5rem;
+  background: var(--surface-primary);
+  border: 2px solid var(--border-default);
+  border-radius: 1rem;
   color: var(--text-primary);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 
   &:focus {
-    outline: 2px solid var(--action-primary);
-    outline-offset: 2px;
+    outline: none;
+    border-color: var(--action-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   &::placeholder {
@@ -98,81 +126,105 @@ const SearchInput = styled.input`
 `;
 
 const Tag = styled.button`
-  padding: 0.25rem 0.5rem;
+  padding: 0.5rem 1rem;
   font-size: 0.875rem;
-  background: var(--surface-tertiary);
-  border: 1px solid var(--border-default);
-  border-radius: 9999px;
-  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2rem;
+  color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 
   &:hover {
-    background: var(--surface-secondary);
-    color: var(--text-primary);
-    border-color: var(--border-hover);
-  }
-`;
-
-const CTAButton = styled.button`
-  background: var(--action-primary);
-  color: var(--text-inverse);
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 1rem 1.5rem;
-  border-radius: 0.5rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease-out;
-  min-width: 160px;
-
-  &:hover {
-    background: var(--action-primary-hover);
+    background: var(--action-primary);
+    color: var(--text-inverse);
     transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.125rem;
-    padding: 1rem 2rem;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   }
 `;
 
 const PopularTags = styled.div`
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
-  margin-top: 1rem;
+  margin-bottom: 2rem;
+`;
+
+const CTAButton = styled.button`
+  background: linear-gradient(45deg, var(--action-primary), var(--action-primary-hover));
+  color: var(--text-inverse);
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 1.25rem 2.5rem;
+  border-radius: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+  position: relative;
+  z-index: 1;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+    padding: 1.5rem 3rem;
+  }
 `;
 
 const StatsSection = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
   max-width: 1024px;
-  margin: 3rem auto;
+  margin: 5rem auto;
   padding: 0 1rem;
   text-align: center;
 `;
 
-const StatItem = styled.div``;
-const StatIcon = styled.div`
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
+const StatItem = styled.div`
+  background: var(--surface-primary);
+  border-radius: 1rem;
+  padding: 2rem 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
+
+const StatIcon = styled.div`
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--action-primary);
+`;
+
+const StatNumber = styled.div`
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+`;
+
 const StatText = styled.div`
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--text-secondary);
   font-weight: 500;
 `;
 
 const BrowseSection = styled.section`
   max-width: 1280px;
-  margin: 0 auto 4rem;
+  margin: 0 auto 6rem;
   padding: 0 1rem;
 `;
 
@@ -180,47 +232,65 @@ const SectionTitle = styled.h2`
   font-family: var(--font-sora);
   text-align: center;
   color: var(--text-primary);
-  margin-bottom: 2rem;
-`;
-
-const GameGrid = styled.div`
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  font-weight: 700;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    font-size: 2.5rem;
   }
 `;
 
-const GameCard = styled.button`
-  background: var(--surface-secondary);
-  border: 1px solid var(--border-default);
-  border-radius: 0.5rem;
-  padding: 1rem;
-  text-align: center;
+const ProductGrid = styled.div`
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+`;
+
+const ProductCard = styled.div`
+  background: var(--surface-primary);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
   cursor: pointer;
-  transition: all 0.2s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    border-color: var(--border-hover);
-    box-shadow: 0 4px 6px oklch(0% 0 0 / 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
   }
 `;
 
-const GameIcon = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 0.375rem;
+const ProductImage = styled.img`
+  width: 100%;
+  height: 200px;
   object-fit: cover;
+  transition: transform 0.3s ease;
+
+  ${ProductCard}:hover & {
+    transform: scale(1.05);
+  }
+`;
+
+const ProductInfo = styled.div`
+  padding: 1.5rem;
+`;
+
+const ProductName = styled.h3`
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 `;
 
-const GameName = styled.div`
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--text-primary);
+const ProductPrice = styled.div`
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--action-primary);
 `;
 
 // ----- Component -----
@@ -232,28 +302,35 @@ export default function HomePage() {
   const popularTags = t.raw("home.popularTags") as string[];
   const stats = (t.raw("home.stats") as string[]).map(
     (text: string, index: number) => ({
-      icon: ["🔒", "⭐", "📦", "🛡️"][index],
-      text,
+      icon: [<FaUsers />, <FaStar />, <FaTruck />, <FaHeadset />][index],
+      number: text.split(' ')[0],
+      text: text.split(' ').slice(1).join(' '),
     })
   );
   const games = (t.raw("home.games") as string[]).map(
     (name: string, index: number) => ({
       name,
-      icon: [
-        "https://mockimage.tw/photo/48x48/ffffff/000000/Apex",
-        "https://mockimage.tw/photo/48x48/ffffff/000000/WoW",
-        "https://mockimage.tw/photo/48x48/ffffff/000000/Valorant",
-        "https://mockimage.tw/photo/48x48/ffffff/000000/Dota2",
+      image: [
+        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=300&h=200&fit=crop", // Apex
+        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=200&fit=crop", // WoW
+        "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=300&h=200&fit=crop", // Valorant
+        "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop", // Dota
       ][index],
     })
   );
 
   const handleTagClick = (tag: string) => setSearchQuery(tag);
 
+  const statItems = stats.map((stat, index) => (
+    <StatItem key={index}>
+      <StatIcon>{stat.icon}</StatIcon>
+      <StatNumber>{stat.number}</StatNumber>
+      <StatText>{stat.text}</StatText>
+    </StatItem>
+  ));
+
   return (
-    <PageWrapper
-      className={`${inter.variable} ${sora.variable} ${geistMono.variable}`}
-    >
+    <PageWrapper>
       <HeroSection>
         <HeroTitle>
           {t("home.title")} <span>{t("home.titleHighlight")}</span>
@@ -262,12 +339,15 @@ export default function HomePage() {
         <HeroDescription>{t("home.description")}</HeroDescription>
 
         <SearchContainer>
-          <SearchInput
-            placeholder={t("home.searchPlaceholder")}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            aria-label="Search"
-          />
+          <SearchWrapper>
+            <SearchIcon />
+            <SearchInput
+              placeholder={t("home.searchPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search"
+            />
+          </SearchWrapper>
         </SearchContainer>
 
         <PopularTags>
@@ -282,24 +362,22 @@ export default function HomePage() {
       </HeroSection>
 
       <StatsSection>
-        {stats.map((stat) => (
-          <StatItem key={stat.text}>
-            <StatIcon aria-hidden="true">{stat.icon}</StatIcon>
-            <StatText>{stat.text}</StatText>
-          </StatItem>
-        ))}
+        {statItems}
       </StatsSection>
 
       <BrowseSection>
         <SectionTitle>{t("home.browseByGame")}</SectionTitle>
-        <GameGrid>
-          {games.map((game) => (
-            <GameCard key={game.name}>
-              <GameIcon src={game.icon} alt={`${game.name} icon`} />
-              <GameName>{game.name}</GameName>
-            </GameCard>
+        <ProductGrid>
+          {games.map((game, index) => (
+            <ProductCard key={index}>
+              <ProductImage src={game.image} alt={game.name} />
+              <ProductInfo>
+                <ProductName>{game.name}</ProductName>
+                <ProductPrice>Shop Now</ProductPrice>
+              </ProductInfo>
+            </ProductCard>
           ))}
-        </GameGrid>
+        </ProductGrid>
       </BrowseSection>
     </PageWrapper>
   );
