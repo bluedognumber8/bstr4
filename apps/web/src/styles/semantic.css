@@ -1,0 +1,26 @@
+@layer semantic {
+  :root {
+    /* TEXT */
+    --text-primary: var(--gray-900);
+    --text-secondary: var(--gray-700);
+    --text-muted: var(--gray-500);
+    --text-inverse: var(--gray-50);
+
+    /* SURFACES */
+    --surface-primary: var(--gray-50);
+    --surface-secondary: var(--gray-100);
+
+    /* BORDERS */
+    --border-default: var(--gray-200);
+
+    /* ACTIONS */
+    --action-primary: var(--gray-800);
+    --action-primary-hover: var(--gray-900);
+
+    /* PURPOSE COLORS */
+    --info: var(--blue-500);
+    --danger: var(--red-500);
+    --success: var(--green-500);
+    --warning: var(--yellow-500);
+  }
+}

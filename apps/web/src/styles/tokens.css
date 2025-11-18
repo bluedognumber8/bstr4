@@ -1,0 +1,31 @@
+:root {
+  /* Layout — Mobile first */
+  --max-width: 1280px;
+  --content-width: 720px;
+
+  /* Spacing system */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* Header & Sizing */
+  --header-height: 56px; /* mobile-first */
+  --header-height-desktop: 72px;
+
+  /* Mobile-first breakpoints */
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-xxl: 1440px;
+}
+
+/* Desktop overrides */
+@media (min-width: 1024px) {
+  :root {
+    --header-height: var(--header-height-desktop);
+  }
+}

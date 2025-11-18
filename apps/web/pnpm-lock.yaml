@@ -14,12 +14,21 @@ importers:
       next-intl:
         specifier: ^4.5.3
         version: 4.5.3(next@16.0.3(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      next-yak:
+        specifier: ^8.0.1
+        version: 8.0.1
       react:
         specifier: 19.2.0
         version: 19.2.0
       react-dom:
         specifier: 19.2.0
         version: 19.2.0(react@19.2.0)
+      zustand:
+        specifier: ^5.0.8
+        version: 5.0.8(@types/react@19.2.6)(react@19.2.0)
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -425,10 +434,22 @@ packages:
   '@schummar/icu-type-parser@1.21.5':
     resolution: {integrity: sha512-bXHSaW5jRTmke9Vd0h5P7BtWZG9Znqb8gSDxZnxaGSJnGwPLDPfS+3g0BKzeWqzgZPsIVZkM7m2tbo18cm5HBw==}
 
+  '@swc/core-darwin-arm64@1.13.20':
+    resolution: {integrity: sha512-k/nqRwm6G3tw1BbCDxc3KmAMGsuDYA5Uh4MjYm23e+UziLyHz0z7W0zja3el+yGBIZXKlgSzWVFLsFDFzVqtgg==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [darwin]
+
   '@swc/core-darwin-arm64@1.15.2':
     resolution: {integrity: sha512-Ghyz4RJv4zyXzrUC1B2MLQBbppIB5c4jMZJybX2ebdEQAvryEKp3gq1kBksCNsatKGmEgXul88SETU19sMWcrw==}
     engines: {node: '>=10'}
     cpu: [arm64]
+    os: [darwin]
+
+  '@swc/core-darwin-x64@1.13.20':
+    resolution: {integrity: sha512-7xr+ACdUMNyrN87oEF1GvJIZJBAhGolfQVB0EYP08JEy8VSh//FEwfdlUz8gweaZyjOl1nuPS6ncXlKgZuZU8A==}
+    engines: {node: '>=10'}
+    cpu: [x64]
     os: [darwin]
 
   '@swc/core-darwin-x64@1.15.2':
@@ -437,14 +458,32 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@swc/core-linux-arm-gnueabihf@1.13.20':
+    resolution: {integrity: sha512-IaOLxU1U/oGV3lZ2T8tD5nB/5O60UFPqj5ZxYzDpCBVB73tDQDIxiDcro1X81nHbwJHjuHmbIrhoflS7LQN6+A==}
+    engines: {node: '>=10'}
+    cpu: [arm]
+    os: [linux]
+
   '@swc/core-linux-arm-gnueabihf@1.15.2':
     resolution: {integrity: sha512-ZUQVCfRJ9wimuxkStRSlLwqX4TEDmv6/J+E6FicGkQ6ssLMWoKDy0cAo93HiWt/TWEee5vFhFaSQYzCuBEGO6A==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
 
+  '@swc/core-linux-arm64-gnu@1.13.20':
+    resolution: {integrity: sha512-Lg6FyotDydXGnNnlw+u7vCZzR2+fX3Q2HiULBTYl2dey3TvRyzAfEhdgMjUc4beRzf26U9rzMuTroJ6KMBCBjA==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+
   '@swc/core-linux-arm64-gnu@1.15.2':
     resolution: {integrity: sha512-GZh3pYBmfnpQ+JIg+TqLuz+pM+Mjsk5VOzi8nwKn/m+GvQBsxD5ectRtxuWUxMGNG8h0lMy4SnHRqdK3/iJl7A==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@swc/core-linux-arm64-musl@1.13.20':
+    resolution: {integrity: sha512-d1SvxmFykS0Ep8nPbduV1UwCvFjZ3ESzFKQdTbkr72bge8AseILBI9TbLTmoeWndDaTesiiTKRD5Y1iAvF1wvA==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -455,8 +494,20 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@swc/core-linux-x64-gnu@1.13.20':
+    resolution: {integrity: sha512-Bwmng57EuMod58Q8GDJA8rmUgFl20taK8w8MqeeDMiCnZY2+rJrNERbIX3sXZbwsf/kCIELZ7q4ZXiwdyB4zoQ==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+
   '@swc/core-linux-x64-gnu@1.15.2':
     resolution: {integrity: sha512-1nO/UfdCLuT/uE/7oB3EZgTeZDCIa6nL72cFEpdegnqpJVNDI6Qb8U4g/4lfVPkmHq2lvxQ0L+n+JdgaZLhrRA==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@swc/core-linux-x64-musl@1.13.20':
+    resolution: {integrity: sha512-osCm3VEKL/OIKInyhy75S5B+R+QGBdpR1B5vwTYqG/1RB4vFM3O5SDtRZabd6NV9Cxc9dcLztWyZjhs2qp63SQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -467,10 +518,22 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@swc/core-win32-arm64-msvc@1.13.20':
+    resolution: {integrity: sha512-svbQNirwEa6zwaAJPrEmQnMVZsOz8Jpr4nakFLkYIQwwJ73sBUkUJvH9ouIWmIu5bvgQrbQlRpxWTIY3e0Utlg==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [win32]
+
   '@swc/core-win32-arm64-msvc@1.15.2':
     resolution: {integrity: sha512-IzUb5RlMUY0r1A9IuJrQ7Tbts1wWb73/zXVXT8VhewbHGoNlBKE0qUhKMED6Tv4wDF+pmbtUJmKXDthytAvLmg==}
     engines: {node: '>=10'}
     cpu: [arm64]
+    os: [win32]
+
+  '@swc/core-win32-ia32-msvc@1.13.20':
+    resolution: {integrity: sha512-uVjjwGXJltUQK0v1qQSNGeMS6osLJuwgeTti5N7kxQ6mOfa1irxq+TX0YdIVQwIONMjzI+TP7lhqPeA9VdUjRg==}
+    engines: {node: '>=10'}
+    cpu: [ia32]
     os: [win32]
 
   '@swc/core-win32-ia32-msvc@1.15.2':
@@ -479,11 +542,26 @@ packages:
     cpu: [ia32]
     os: [win32]
 
+  '@swc/core-win32-x64-msvc@1.13.20':
+    resolution: {integrity: sha512-Xm1JAew/P0TgsPSXyo60IH865fAmt9b2Mzd0FBJ77Q1xA1o/Oi9teCeGChyFq3+6JFao6uT0N4mcI3BJ4WBfkA==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [win32]
+
   '@swc/core-win32-x64-msvc@1.15.2':
     resolution: {integrity: sha512-iJaHeYCF4jTn7OEKSa3KRiuVFIVYts8jYjNmCdyz1u5g8HRyTDISD76r8+ljEOgm36oviRQvcXaw6LFp1m0yyA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [win32]
+
+  '@swc/core@1.13.20':
+    resolution: {integrity: sha512-w6REE95NkGhQH/baA0reb6IQjVzSy5HOz9bZnRTFgOv+a1ZDo4p6yVs4McpFOZJeu810DSHayO3mwBsBXxZcaw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@swc/helpers': '>=0.5.17'
+    peerDependenciesMeta:
+      '@swc/helpers':
+        optional: true
 
   '@swc/core@1.15.2':
     resolution: {integrity: sha512-OQm+yJdXxvSjqGeaWhP6Ia264ogifwAO7Q12uTDVYj/Ks4jBTI4JknlcjDRAXtRhqbWsfbZyK/5RtuIPyptk3w==}
@@ -1441,6 +1519,15 @@ packages:
       typescript:
         optional: true
 
+  next-themes@0.4.6:
+    resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+
+  next-yak@8.0.1:
+    resolution: {integrity: sha512-NWS6zW/Rg3MaEV59sOCLiKWxBwSangxueHI+rKGghzzI5v8q7pvwcz6azJtMyS2bI5EwZlVDVw3DqtgYqS33BA==}
+
   next@16.0.3:
     resolution: {integrity: sha512-Ka0/iNBblPFcIubTA1Jjh6gvwqfjrGq1Y2MTI5lbjeLIAfmC+p5bQmojpRZqgHHVu5cG4+qdIiwXiBSm/8lZ3w==}
     engines: {node: '>=20.9.0'}
@@ -1832,6 +1919,9 @@ packages:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
 
+  yak-swc@8.0.1:
+    resolution: {integrity: sha512-j7I4FSqe1QMUzJHJ8AYecneSP1xtSuS/ZXfxTOaJhS3u/JCOB4SlOnw0ofsLVR8RkB+XIg+1Cmrm7vWtE5V2mw==}
+
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
@@ -1847,6 +1937,24 @@ packages:
 
   zod@4.1.12:
     resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
+
+  zustand@5.0.8:
+    resolution: {integrity: sha512-gyPKpIaxY9XcO2vSMrLbiER7QMAMGOQZVRdJ6Zi782jkbzZygq5GI9nG8g+sMgitRtndwaBSl7uiqC49o1SSiw==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
+        optional: true
 
 snapshots:
 
@@ -2224,35 +2332,81 @@ snapshots:
 
   '@schummar/icu-type-parser@1.21.5': {}
 
+  '@swc/core-darwin-arm64@1.13.20':
+    optional: true
+
   '@swc/core-darwin-arm64@1.15.2':
+    optional: true
+
+  '@swc/core-darwin-x64@1.13.20':
     optional: true
 
   '@swc/core-darwin-x64@1.15.2':
     optional: true
 
+  '@swc/core-linux-arm-gnueabihf@1.13.20':
+    optional: true
+
   '@swc/core-linux-arm-gnueabihf@1.15.2':
+    optional: true
+
+  '@swc/core-linux-arm64-gnu@1.13.20':
     optional: true
 
   '@swc/core-linux-arm64-gnu@1.15.2':
     optional: true
 
+  '@swc/core-linux-arm64-musl@1.13.20':
+    optional: true
+
   '@swc/core-linux-arm64-musl@1.15.2':
+    optional: true
+
+  '@swc/core-linux-x64-gnu@1.13.20':
     optional: true
 
   '@swc/core-linux-x64-gnu@1.15.2':
     optional: true
 
+  '@swc/core-linux-x64-musl@1.13.20':
+    optional: true
+
   '@swc/core-linux-x64-musl@1.15.2':
+    optional: true
+
+  '@swc/core-win32-arm64-msvc@1.13.20':
     optional: true
 
   '@swc/core-win32-arm64-msvc@1.15.2':
     optional: true
 
+  '@swc/core-win32-ia32-msvc@1.13.20':
+    optional: true
+
   '@swc/core-win32-ia32-msvc@1.15.2':
+    optional: true
+
+  '@swc/core-win32-x64-msvc@1.13.20':
     optional: true
 
   '@swc/core-win32-x64-msvc@1.15.2':
     optional: true
+
+  '@swc/core@1.13.20':
+    dependencies:
+      '@swc/counter': 0.1.3
+      '@swc/types': 0.1.25
+    optionalDependencies:
+      '@swc/core-darwin-arm64': 1.13.20
+      '@swc/core-darwin-x64': 1.13.20
+      '@swc/core-linux-arm-gnueabihf': 1.13.20
+      '@swc/core-linux-arm64-gnu': 1.13.20
+      '@swc/core-linux-arm64-musl': 1.13.20
+      '@swc/core-linux-x64-gnu': 1.13.20
+      '@swc/core-linux-x64-musl': 1.13.20
+      '@swc/core-win32-arm64-msvc': 1.13.20
+      '@swc/core-win32-ia32-msvc': 1.13.20
+      '@swc/core-win32-x64-msvc': 1.13.20
 
   '@swc/core@1.15.2':
     dependencies:
@@ -3392,6 +3546,21 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
+  next-themes@0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
+
+  next-yak@8.0.1:
+    dependencies:
+      '@babel/parser': 7.28.5
+      '@babel/traverse': 7.28.5
+      '@swc/core': 1.13.20
+      yak-swc: 8.0.1
+    transitivePeerDependencies:
+      - '@swc/helpers'
+      - supports-color
+
   next@16.0.3(@babel/core@7.28.5)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       '@next/env': 16.0.3
@@ -3928,6 +4097,10 @@ snapshots:
 
   word-wrap@1.2.5: {}
 
+  yak-swc@8.0.1:
+    dependencies:
+      '@swc/counter': 0.1.3
+
   yallist@3.1.1: {}
 
   yocto-queue@0.1.0: {}
@@ -3937,3 +4110,8 @@ snapshots:
       zod: 4.1.12
 
   zod@4.1.12: {}
+
+  zustand@5.0.8(@types/react@19.2.6)(react@19.2.0):
+    optionalDependencies:
+      '@types/react': 19.2.6
+      react: 19.2.0

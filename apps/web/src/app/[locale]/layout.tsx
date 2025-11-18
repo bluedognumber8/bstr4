@@ -1,28 +1,39 @@
 // src/app/[locale]/layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Inter, Sora, Geist_Mono } from "next/font/google";
+
+import "../globals.css";
 import { hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import {
+  setRequestLocale,
+  getMessages,
+  getTranslations,
+} from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { getTranslations } from "next-intl/server";
+import RootProvider from "@/providers";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter", // body/main text
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sora", // headings
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
+  variable: "--font-geist-mono", // code
 });
 
-/* 1️⃣  locale-aware metadata → keeps page static */
+/* 1️⃣ locale-aware metadata */
 export async function generateMetadata({
   params,
 }: {
@@ -46,14 +57,20 @@ export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) notFound();
+
   setRequestLocale(locale);
 
-  /* 2️⃣  drop NextIntlClientProvider unless you have
-        client-side translations */
+  // ✔ recommended: pass locale for clarity + type safety
+  const messages = await getMessages({ locale });
+
   return (
-    <html lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        className={`${inter.variable} ${sora.variable} ${geistMono.variable}`}
+      >
+        <RootProvider locale={locale} messages={messages}>
+          {children}
+        </RootProvider>
       </body>
     </html>
   );

@@ -60,3 +60,5 @@ SEO stays focused on language, not on country variants.
 
 NEED TO ADJUST FOR EXISTING PATHS
 MAKE SURE: <link rel="alternate" href="https://example.com/en" hreflang="en" /> exist!
+
+HANDLE METADATA for each page

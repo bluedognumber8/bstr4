@@ -1,0 +1,22 @@
+@layer primitives {
+  :root {
+    /* GRAYSCALE */
+    --gray-50: oklch(0.99 0 0);
+    --gray-100: oklch(0.97 0 0);
+    --gray-200: oklch(0.92 0 0);
+    --gray-300: oklch(0.89 0 0);
+    --gray-400: oklch(0.78 0 0);
+    --gray-500: oklch(0.62 0 0);
+    --gray-600: oklch(0.45 0 0);
+    --gray-700: oklch(0.35 0 0);
+    --gray-800: oklch(0.25 0 0);
+    --gray-900: oklch(0.18 0 0);
+    --gray-950: oklch(0.13 0 0);
+
+    /* PURPOSE COLORS */
+    --blue-500: oklch(0.65 0.19 250);
+    --red-500: oklch(0.65 0.19 30);
+    --green-500: oklch(0.65 0.19 145);
+    --yellow-500: oklch(0.65 0.19 85);
+  }
+}
