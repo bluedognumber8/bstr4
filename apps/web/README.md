@@ -34,3 +34,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+i18n
+todo: 6) How to let the visitor switch country?
+
+You offer:
+
+A country selector in the header (flag + country name)
+
+A dropdown modal with all supported countries
+
+When user selects:
+→ set a cookie COUNTRY=US
+
+Example:
+
+document.cookie = `COUNTRY=US; path=/; max-age=${60*60*24*365}`;
+
+Then in the product page:
+
+const country = cookies().get("COUNTRY")?.value ?? "US";
+const price = pricesByCountry[country];
+
+SEO stays focused on language, not on country variants.
+
+NEED TO ADJUST FOR EXISTING PATHS
+MAKE SURE: <link rel="alternate" href="https://example.com/en" hreflang="en" /> exist!
