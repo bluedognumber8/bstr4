@@ -10,6 +10,8 @@ import { createNavigation } from "next-intl/navigation";
 import { queries, zIndex } from "@/config/theme";
 import LanguageSwitcher from "@/components/features/LanguageSwitcher";
 import { LoginButton } from "@/components/features/Auth/LoginButton";
+import { FeatureBadge } from "@/components/ui/FeatureBadge";
+import { useCartStore } from "@/store/useCartStore";
 
 // Setup Link for next-intl
 const { Link } = createNavigation();
@@ -205,7 +207,7 @@ export default function Header() {
   }, []);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
-
+  const openCart = useCartStore((state) => state.openCart);
   return (
     <HeaderRoot>
       <InnerContainer>
@@ -255,7 +257,10 @@ export default function Header() {
               </StyledSelect>
             )}
 
-            <LanguageSwitcher />
+            <div style={{ position: "relative" }}>
+              <FeatureBadge text="FR" />
+              <LanguageSwitcher />
+            </div>
           </MobileNavGroup>
         </Nav>
 
@@ -266,9 +271,9 @@ export default function Header() {
             <span>3</span>
           </IconButton>
 
-          <IconButton aria-label="Cart">
+          <IconButton aria-label="Cart" onClick={openCart}>
             <FaShoppingCart size={20} />
-            <span>2</span>
+            <span>{/* You can connect items.length here too */}</span>
           </IconButton>
 
           {/* CORRECT: LoginButton is standalone. No wrappers. */}

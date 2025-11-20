@@ -14,6 +14,7 @@ import { routing } from "@/i18n/routing";
 import AppProviders from "@/providers";
 import Header from "@/components/features/Header";
 import Footer from "@/components/features/Footer";
+import { CartDrawer } from "@/components/features/Cart/CartDrawer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -76,6 +77,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <Header />
           {children}
           <Footer />
+          <CartDrawer />
         </AppProviders>
       </body>
     </html>

@@ -4,6 +4,7 @@ import { ThemeProvider } from "./ThemeProvider";
 import { IntlProvider } from "./IntlProvider";
 import { type Messages } from "next-intl";
 import { AuthProvider } from "./AuthProvider";
+import { ToastProvider } from "./ToastProvider";
 
 export default function AppProviders({
   children,
@@ -17,7 +18,10 @@ export default function AppProviders({
   return (
     <IntlProvider locale={locale} messages={messages}>
       <ThemeProvider>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          {children}
+          <ToastProvider />
+        </AuthProvider>
       </ThemeProvider>
     </IntlProvider>
   );

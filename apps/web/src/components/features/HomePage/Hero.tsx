@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react"; // 1. Import useState
 import { Search } from "lucide-react";
 import { queries } from "@/config/theme";
+import { toast } from "sonner"; // Import toast
 
 const Section = styled.section`
   position: relative;
@@ -181,6 +182,24 @@ export const Hero = () => {
 
   // 1. State for functionality
   const [searchQuery, setSearchQuery] = useState("");
+  const handleSearch = (query: string) => {
+    if (!query.trim()) return;
+
+    // 1. UX Feedback (Toast)
+    toast.info(`Searching for "${query}"...`);
+
+    // 2. ANALYTICS: Collect data here!
+    // TODO: Send this string to Strapi endpoint /api/search-analytics
+    console.log("User is interested in:", query);
+
+    // 3. Navigate
+    // router.push(`/search?q=${encodeURIComponent(query)}`);
+  };
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleSearch(searchQuery);
+    }
+  };
 
   return (
     <Section>
@@ -193,12 +212,12 @@ export const Hero = () => {
         <IconWrapper>
           <Search size={20} />
         </IconWrapper>
-        {/* 2. Controlled Input */}
         <SearchInput
           placeholder={t("searchPlaceholder")}
-          aria-label="Search products"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyDown} // <-- Add Listener
+          aria-label="Search products"
         />
       </SearchWrapper>
 
@@ -206,13 +225,21 @@ export const Hero = () => {
       <PopularWrapper>
         <PopularLabel>Popular:</PopularLabel>
         {tags.map((tag) => (
-          <Tag key={tag} onClick={() => setSearchQuery(tag)}>
+          <Tag
+            key={tag}
+            onClick={() => {
+              setSearchQuery(tag);
+              handleSearch(tag); // Trigger search immediately on click
+            }}
+          >
             {tag}
           </Tag>
         ))}
       </PopularWrapper>
 
-      <CtaButton>{t("cta")}</CtaButton>
+      <CtaButton onClick={() => handleSearch(searchQuery)}>
+        {t("cta")}
+      </CtaButton>
     </Section>
   );
 };
