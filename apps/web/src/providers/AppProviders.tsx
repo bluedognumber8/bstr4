@@ -3,6 +3,7 @@
 import { ThemeProvider } from "./ThemeProvider";
 import { IntlProvider } from "./IntlProvider";
 import { type Messages } from "next-intl";
+import { AuthProvider } from "./AuthProvider";
 
 export default function AppProviders({
   children,
@@ -15,7 +16,9 @@ export default function AppProviders({
 }) {
   return (
     <IntlProvider locale={locale} messages={messages}>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </ThemeProvider>
     </IntlProvider>
   );
 }
