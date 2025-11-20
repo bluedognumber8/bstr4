@@ -11,9 +11,9 @@ import {
 } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import RootProvider from "@/providers";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import AppProviders from "@/providers";
+import Header from "@/components/features/Header";
+import Footer from "@/components/features/Footer";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -66,15 +66,17 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${sora.variable} ${geistMono.variable}`}
-      >
-        <RootProvider locale={locale} messages={messages}>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${inter.variable} ${sora.variable} ${geistMono.variable}`}
+    >
+      <body>
+        <AppProviders locale={locale} messages={messages}>
           <Header />
           {children}
           <Footer />
-        </RootProvider>
+        </AppProviders>
       </body>
     </html>
   );

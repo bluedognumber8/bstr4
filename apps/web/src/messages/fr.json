@@ -1,33 +1,79 @@
 {
   "home": {
+    "hero": {
+      "title": "Bienvenue sur",
+      "titleHighlight": "Gaming Shop",
+      "subtitle": "Votre destination ultime pour l'équipement pro",
+      "description": "Découvrez les derniers jeux, le matériel e-sport et les produits exclusifs de vos titres préférés.",
+      "searchPlaceholder": "Rechercher jeux, matériel ou butin...",
+      "cta": "Commencer les achats",
+      "tags": ["Action", "RPG", "FPS", "Stratégie"]
+    },
+    "stats": {
+      "gamers": "Joueurs Satisfaits",
+      "rating": "Note Moyenne",
+      "shipping": "Livraison Mondiale",
+      "support": "Support 24/7"
+    },
+    "games": {
+      "title": "Mondes Tendances",
+      "action": "Acheter",
+      "list": [
+        { "name": "Apex Legends", "category": "Battle Royale" },
+        { "name": "World of Warcraft", "category": "MMORPG" },
+        { "name": "Valorant", "category": "Tir Tactique" },
+        { "name": "Dota 2", "category": "MOBA" }
+      ]
+    },
+    "metadata": {
+      "title": "Gaming Shop | Meilleurs Équipements & Jeux",
+      "description": "Achetez les derniers jeux, matériel e-sport et produits exclusifs. Livraison rapide et support 24/7."
+    },
     "title": "Bienvenue sur",
     "titleHighlight": "Gaming Shop",
     "subtitle": "Votre destination ultime pour l'équipement de jeu",
-    "description": "Découvrez les derniers jeux, accessoires et marchandises de vos titres préférés",
-    "searchPlaceholder": "Rechercher des jeux, équipements ou accessoires...",
+    "description": "Découvrez les derniers jeux, accessoires et produits dérivés de vos titres préférés",
+    "searchPlaceholder": "Rechercher des jeux, équipements...",
     "popularTags": ["Action", "Aventure", "RPG", "Stratégie"],
-    "stats": [
-      "10M+ Gamers Heureux",
-      "Note 4.9/5",
-      "Livraison Gratuite Mondiale",
-      "Support 24/7"
-    ],
-    "games": ["Apex Legends", "World of Warcraft", "Valorant", "Dota 2"],
-    "browseByGame": "Acheter par Jeu",
-    "shopNow": "Commencer les Achats",
-    "testimonialsTitle": "Ce que nos gamers disent",
+
+    "browseByGame": "Parcourir par jeu",
+    "shopNow": "Commencer les achats",
+    "testimonialsTitle": "Ce que disent nos joueurs",
     "testimonials": [
       { "text": "Sélection incroyable !", "author": "Alice" },
       { "text": "Livraison rapide !", "author": "Bob" },
       { "text": "Meilleurs prix !", "author": "Charlie" }
     ]
   },
-  "LocaleLayout": {
-    "title": "Créer une application Next",
-    "description": "Généré par create next app"
+  "Footer": {
+    "brand": {
+      "description": "Améliorez votre setup avec du matériel premium, des objets de collection et les dernières sorties. Fait par des gamers, pour des gamers."
+    },
+    "newsletter": {
+      "title": "Rejoignez la Guilde",
+      "placeholder": "Votre email pour les drops",
+      "button": "S'abonner"
+    },
+    "columns": {
+      "shop": "Boutique",
+      "support": "Aide",
+      "legal": "Légal"
+    },
+    "links": {
+      "games": "Jeux",
+      "hardware": "Matériel",
+      "merch": "Produits Dérivés",
+      "gift_cards": "Cartes Cadeaux",
+      "help_center": "Centre d'aide",
+      "returns": "Retours & Remboursements",
+      "shipping": "Livraison",
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'utilisation"
+    },
+    "copyright": "© {year} Gaming Shop Inc. Tous droits réservés."
   },
-  "MetadataHome": {
-    "title": "Créer une application Next FR",
-    "description": "Généré par create next app"
+  "LocaleLayout": {
+    "title": "Gaming Shop - Le meilleur équipement",
+    "description": "La meilleure boutique de jeux en ligne"
   }
 }

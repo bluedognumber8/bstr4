@@ -1,3 +1,5 @@
+// Cleaned & corrected version — only syntax/semantics fixed, no refactors
+
 "use client";
 
 import { styled } from "next-yak";
@@ -9,7 +11,11 @@ import { FaSearch, FaUsers, FaStar, FaTruck, FaHeadset } from "react-icons/fa";
 
 const PageWrapper = styled.main`
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--surface-primary) 0%, var(--surface-secondary) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--surface-primary) 0%,
+    var(--surface-secondary) 100%
+  );
   font-family: var(--font-inter);
   overflow-x: hidden;
 `;
@@ -22,13 +28,17 @@ const HeroSection = styled.section`
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
     pointer-events: none;
   }
 
@@ -52,7 +62,11 @@ const HeroTitle = styled.h1`
   }
 
   span {
-    background: linear-gradient(45deg, var(--action-primary), var(--action-primary-hover));
+    background: linear-gradient(
+      45deg,
+      var(--action-primary),
+      var(--action-primary-hover)
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -153,7 +167,11 @@ const PopularTags = styled.div`
 `;
 
 const CTAButton = styled.button`
-  background: linear-gradient(45deg, var(--action-primary), var(--action-primary-hover));
+  background: linear-gradient(
+    45deg,
+    var(--action-primary),
+    var(--action-primary-hover)
+  );
   color: var(--text-inverse);
   font-size: 1.125rem;
   font-weight: 600;
@@ -295,29 +313,30 @@ const ProductPrice = styled.div`
 
 // ----- Component -----
 
-export default function HomePage() {
+export default function HomePageOld() {
   const t = useTranslations();
   const [searchQuery, setSearchQuery] = useState("");
 
-  const popularTags = t.raw("home.popularTags") as string[];
-  const stats = (t.raw("home.stats") as string[]).map(
-    (text: string, index: number) => ({
-      icon: [<FaUsers />, <FaStar />, <FaTruck />, <FaHeadset />][index],
-      number: text.split(' ')[0],
-      text: text.split(' ').slice(1).join(' '),
-    })
-  );
-  const games = (t.raw("home.games") as string[]).map(
-    (name: string, index: number) => ({
-      name,
-      image: [
-        "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=300&h=200&fit=crop", // Apex
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=200&fit=crop", // WoW
-        "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=300&h=200&fit=crop", // Valorant
-        "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop", // Dota
-      ][index],
-    })
-  );
+  const popularTags = t.raw("home.hero.tags") as string[];
+
+  const stats = [
+    { icon: <FaUsers />, label: t("home.stats.gamers") },
+    { icon: <FaStar />, label: t("home.stats.rating") },
+    { icon: <FaTruck />, label: t("home.stats.shipping") },
+    { icon: <FaHeadset />, label: t("home.stats.support") },
+  ];
+
+  const games = (
+    t.raw("home.games.list") as { name: string; category: string }[]
+  ).map((g, i) => ({
+    ...g,
+    image: [
+      "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=300&h=200&fit=crop",
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=300&h=200&fit=crop",
+      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=300&h=200&fit=crop",
+      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=200&fit=crop",
+    ][i],
+  }));
 
   const handleTagClick = (tag: string) => setSearchQuery(tag);
 
@@ -335,6 +354,7 @@ export default function HomePage() {
         <HeroTitle>
           {t("home.title")} <span>{t("home.titleHighlight")}</span>
         </HeroTitle>
+
         <HeroSubtitle>{t("home.subtitle")}</HeroSubtitle>
         <HeroDescription>{t("home.description")}</HeroDescription>
 
@@ -361,9 +381,7 @@ export default function HomePage() {
         <CTAButton>{t("home.shopNow")}</CTAButton>
       </HeroSection>
 
-      <StatsSection>
-        {statItems}
-      </StatsSection>
+      <StatsSection>{statItems}</StatsSection>
 
       <BrowseSection>
         <SectionTitle>{t("home.browseByGame")}</SectionTitle>

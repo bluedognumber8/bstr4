@@ -1,31 +1,111 @@
-:root {
-  /* Layout — Mobile first */
-  --max-width: 1280px;
-  --content-width: 720px;
-
-  /* Spacing system */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-
-  /* Header & Sizing */
-  --header-height: 56px; /* mobile-first */
-  --header-height-desktop: 72px;
-
-  /* Mobile-first breakpoints */
-  --bp-sm: 480px;
-  --bp-md: 768px;
-  --bp-lg: 1024px;
-  --bp-xl: 1280px;
-  --bp-xxl: 1440px;
-}
-
-/* Desktop overrides */
-@media (min-width: 1024px) {
+/* src/styles/tokens.css */
+@layer tokens {
   :root {
-    --header-height: var(--header-height-desktop);
+    /* ----------------------------- */
+    /* 1. PRIMITIVES (The Palette)   */
+    /* ----------------------------- */
+
+    /* Grayscale (OKLCH) */
+    --gray-0: #ffffff; /* Pure white for safety */
+    --gray-50: oklch(0.99 0 0);
+    --gray-100: oklch(0.97 0 0);
+    --gray-200: oklch(0.92 0 0);
+    --gray-300: oklch(0.89 0 0);
+    --gray-400: oklch(0.78 0 0);
+    --gray-500: oklch(0.62 0 0);
+    --gray-600: oklch(0.45 0 0);
+    --gray-700: oklch(0.35 0 0);
+    --gray-800: oklch(0.25 0 0);
+    --gray-900: oklch(0.18 0 0);
+    --gray-950: oklch(0.13 0 0);
+    --gray-1000: #000000; /* Pure black */
+
+    /* Brand / Intent Colors */
+    --blue-500: oklch(0.65 0.19 250);
+    --red-500: oklch(0.65 0.19 30);
+    --green-500: oklch(0.65 0.19 145);
+    --yellow-500: oklch(0.65 0.19 85);
+
+    /* ----------------------------- */
+    /* 2. VARIABLES (Measurements)   */
+    /* ----------------------------- */
+
+    /* Fonts - Mapped from Next.js Variables */
+    --font-body: var(--font-inter), system-ui, sans-serif;
+    --font-heading: var(--font-sora), system-ui, sans-serif;
+    --font-code: var(--font-geist-mono), monospace;
+
+    /* Spacing Scale (4px base) */
+    --space-1: 0.25rem; /* 4px */
+    --space-2: 0.5rem; /* 8px */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem; /* 16px */
+    --space-5: 1.25rem; /* 20px */
+    --space-6: 1.5rem; /* 24px */
+    --space-8: 2rem; /* 32px */
+    --space-10: 2.5rem; /* 40px */
+    --space-12: 3rem; /* 48px */
+    --space-16: 4rem; /* 64px */
+
+    /* Border Radius */
+    --radius-sm: 0.25rem; /* 4px */
+    --radius-md: 0.5rem; /* 8px */
+    --radius-lg: 0.75rem; /* 12px */
+    --radius-full: 9999px;
+
+    /* ----------------------------- */
+    /* 3. SEMANTICS (Light Theme)    */
+    /* ----------------------------- */
+
+    /* Backgrounds */
+    --bg-canvas: var(--gray-50); /* Page background */
+    --bg-surface: var(--gray-100); /* Cards, sidebars */
+    --bg-surface-hover: var(--gray-200);
+    --bg-inverse: var(--gray-900);
+
+    /* Text */
+    --fg-primary: var(--gray-900);
+    --fg-secondary: var(--gray-700);
+    --fg-muted: var(--gray-500);
+    --fg-inverse: var(--gray-50);
+
+    /* Borders */
+    --border-subtle: var(--gray-200);
+    --border-strong: var(--gray-300);
+
+    /* Actions (Buttons/Links) */
+    --action-primary: var(--gray-900);
+    --action-primary-hover: var(--gray-800);
+
+    /* Status */
+    --color-info: var(--blue-500);
+    --color-danger: var(--red-500);
+    --color-success: var(--green-500);
+    --color-warning: var(--yellow-500);
+  }
+
+  /* ----------------------------- */
+  /* 4. DARK THEME OVERRIDES       */
+  /* ----------------------------- */
+  [data-theme="dark"] {
+    /* Backgrounds */
+    --bg-canvas: var(--gray-950);
+    --bg-surface: var(--gray-900);
+    --bg-surface-hover: var(--gray-800);
+    --bg-inverse: var(--gray-50);
+
+    /* Text */
+    --fg-primary: var(--gray-50);
+    --fg-secondary: var(--gray-300);
+    --fg-muted: var(--gray-500);
+    --fg-inverse: var(--gray-950);
+
+    /* Borders */
+    --border-subtle: var(--gray-800);
+    --border-strong: var(--gray-700);
+
+    /* Actions */
+    --action-primary: var(--gray-50);
+    --action-primary-hover: var(--gray-200);
   }
 }

@@ -1,2 +1,2 @@
-export * from "./RootProvider";
-export { default } from "./RootProvider";
+export * from "./AppProviders";
+export { default } from "./AppProviders";

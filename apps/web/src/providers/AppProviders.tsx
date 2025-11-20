@@ -4,7 +4,7 @@ import { ThemeProvider } from "./ThemeProvider";
 import { IntlProvider } from "./IntlProvider";
 import { type Messages } from "next-intl";
 
-export default function RootProvider({
+export default function AppProviders({
   children,
   locale,
   messages,
