@@ -12,6 +12,7 @@ import LanguageSwitcher from "@/components/features/LanguageSwitcher";
 import { LoginButton } from "@/components/features/Auth/LoginButton";
 import { FeatureBadge } from "@/components/ui/FeatureBadge";
 import { useCartStore } from "@/store/useCartStore";
+import { useMounted } from "@/hooks/use-mounted"; // 1. Import the hook
 
 // Setup Link for next-intl
 const { Link } = createNavigation();
@@ -199,12 +200,9 @@ export default function Header() {
   const { theme, setTheme } = useTheme();
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   // Hydration fix: Wait for client load
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const openCart = useCartStore((state) => state.openCart);
@@ -217,8 +215,9 @@ export default function Header() {
         {/* Middle: Navigation */}
         <Nav $isOpen={menuOpen}>
           <MobileNavGroup>
-            <NavLink href="/home">Home</NavLink>
+            <NavLink href="/">Home</NavLink>
             <NavLink href="/products">Products</NavLink>
+            <NavLink href="/blog">Blog</NavLink>
             <NavLink href="/about">About</NavLink>
           </MobileNavGroup>
 
@@ -258,7 +257,7 @@ export default function Header() {
             )}
 
             <div style={{ position: "relative" }}>
-              <FeatureBadge text="FR" />
+              <FeatureBadge text="NEW" />
               <LanguageSwitcher />
             </div>
           </MobileNavGroup>

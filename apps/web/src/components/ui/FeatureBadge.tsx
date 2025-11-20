@@ -2,24 +2,34 @@
 
 import { styled, keyframes } from "next-yak";
 
+// Updated Pulse: Uses current text color instead of hardcoded blue
+// (opacity allows it to fade out correctly)
 const pulse = keyframes`
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 var(--action-primary); opacity: 0.7; }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px transparent; opacity: 1; }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 transparent; opacity: 0.7; }
 `;
 
 const Badge = styled.span`
   position: absolute;
   top: -5px;
-  right: -5px;
-  background: var(--action-primary);
-  color: var(--bg-inverse);
-  font-size: 10px;
-  font-weight: bold;
+  right: -8px; /* Moved slightly more right to not overlap text */
+
+  background-color: var(--action-primary);
+
+  /* FIX: Use canvas color (White on Light / Black on Dark) for high contrast */
+  color: var(--bg-canvas);
+
+  font-size: 9px; /* Slightly smaller for cleaner look */
+  font-weight: 800;
   padding: 2px 6px;
-  border-radius: 10px;
+  border-radius: 99px; /* Perfect pill shape */
   z-index: 10;
   pointer-events: none;
+  line-height: 1;
+  letter-spacing: 0.05em;
+
+  /* Animation */
   animation: ${pulse} 2s infinite;
 `;
 

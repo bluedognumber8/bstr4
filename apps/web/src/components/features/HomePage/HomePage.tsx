@@ -4,6 +4,7 @@ import { styled } from "next-yak";
 import { Hero } from "./Hero";
 import { Stats } from "./Stats";
 import { FeaturedGames } from "./FeaturedGames";
+import { LatestNews } from "./LatestNews";
 
 const Main = styled.main`
   min-height: 100vh;
@@ -27,6 +28,7 @@ export default function HomePage() {
       <Hero />
       <Stats />
       <FeaturedGames />
+      <LatestNews />
     </Main>
   );
 }
