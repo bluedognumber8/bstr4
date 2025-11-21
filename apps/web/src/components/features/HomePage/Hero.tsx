@@ -158,7 +158,7 @@ const Tag = styled.button`
 
 const CtaButton = styled.button`
   background-color: var(--action-primary);
-  color: var(--fg-inverse);
+  color: var(--bg-canvas);
   font-size: 1.125rem;
   font-weight: 600;
   padding: var(--space-4) var(--space-10);

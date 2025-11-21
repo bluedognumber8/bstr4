@@ -13,6 +13,16 @@ function composePlugins<T extends NextConfig>(
 // Base Next.js config
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
   // add other Next.js options here
 };
 

@@ -216,7 +216,7 @@ export default function Header() {
         <Nav $isOpen={menuOpen}>
           <MobileNavGroup>
             <NavLink href="/">Home</NavLink>
-            <NavLink href="/products">Products</NavLink>
+            <NavLink href="/games">Games</NavLink>
             <NavLink href="/blog">Blog</NavLink>
             <NavLink href="/about">About</NavLink>
           </MobileNavGroup>
