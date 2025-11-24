@@ -13,6 +13,8 @@ import { LoginButton } from "@/components/features/Auth/LoginButton";
 import { FeatureBadge } from "@/components/ui/FeatureBadge";
 import { useCartStore } from "@/store/useCartStore";
 import { useMounted } from "@/hooks/use-mounted"; // 1. Import the hook
+import { DesktopMegaMenu } from "@/components/features/MegaMenu/DesktopMegaMenu";
+import { MobileMegaMenu } from "@/components/features/MegaMenu/MobileMegaMenu";
 
 // Setup Link for next-intl
 const { Link } = createNavigation();
@@ -29,7 +31,19 @@ const HeaderRoot = styled.header`
   /* Glassmorphism */
   backdrop-filter: blur(12px);
 `;
+const DesktopOnly = styled.div`
+  display: none;
+  ${queries.lg} {
+    display: block;
+  }
+`;
 
+const MobileOnly = styled.div`
+  display: block;
+  ${queries.lg} {
+    display: none;
+  }
+`;
 const InnerContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
@@ -216,7 +230,14 @@ export default function Header() {
         <Nav $isOpen={menuOpen}>
           <MobileNavGroup>
             <NavLink href="/">Home</NavLink>
-            <NavLink href="/games">Games</NavLink>
+            <DesktopOnly>
+              <DesktopMegaMenu />
+            </DesktopOnly>
+
+            <MobileOnly>
+              <MobileMegaMenu />
+            </MobileOnly>
+            <NavLink href="/games">Games test</NavLink>
             <NavLink href="/blog">Blog</NavLink>
             <NavLink href="/about">About</NavLink>
           </MobileNavGroup>
