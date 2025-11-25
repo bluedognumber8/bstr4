@@ -65,7 +65,7 @@ export default function LanguageSwitcher() {
 
     startTransition(() => {
       // next-intl automatically handles the path replacement (e.g., /en/about -> /fr/about)
-      router.replace(pathname, { locale: nextLocale });
+      router.replace(pathname as any, { locale: nextLocale });
     });
   };
 

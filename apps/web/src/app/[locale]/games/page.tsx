@@ -1,6 +1,7 @@
+// apps/web/src/app/[locale]/games/page.tsx
 import { CATALOGUE_GAMES } from "@/data/catalogue";
 import { styled } from "next-yak";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Search } from "lucide-react";
 

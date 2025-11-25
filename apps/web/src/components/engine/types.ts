@@ -16,6 +16,7 @@ export type ProductCard = {
   image: string; // URL
   tags?: string[];
   meta?: Record<string, string>;
+  slug?: string; // Product slug for navigation
 };
 
 export type SectionType =

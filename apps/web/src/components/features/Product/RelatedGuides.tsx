@@ -2,7 +2,7 @@
 
 import { styled } from "next-yak";
 import { MOCK_POSTS } from "@/data/mock-blog";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const Section = styled.section`

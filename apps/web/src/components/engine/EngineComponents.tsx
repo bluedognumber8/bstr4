@@ -1,8 +1,10 @@
+// apps/web/src/components/engine/EngineComponents.tsx
 "use client";
 
 import { styled } from "next-yak";
 import { useState } from "react";
 import * as Icons from "lucide-react";
+import Link from "next/link";
 import { GamePageConfig, GameSection, ProductCard, PulseItem } from "./types";
 
 // --- UTILS ---
@@ -260,7 +262,7 @@ const PulseContainer = styled.div`
   }
 `;
 
-const PulseItem = styled.div`
+const PulseItemContainer = styled.div`
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -287,11 +289,11 @@ export const PulseBar = ({ items }: { items: PulseItem[] }) => (
   <PulseWrapper>
     <PulseContainer>
       {items.map((item) => (
-        <PulseItem key={item.id}>
+        <PulseItemContainer key={item.id}>
           <Icon name={item.icon} />
           <span className="value">{item.value}</span>
           <span className="label">{item.label}</span>
-        </PulseItem>
+        </PulseItemContainer>
       ))}
     </PulseContainer>
   </PulseWrapper>
@@ -455,7 +457,13 @@ const ActionButton = styled.button`
 // 5. RENDER LOGIC
 // =========================================
 
-export const SectionRenderer = ({ section }: { section: GameSection }) => {
+export const SectionRenderer = ({
+  section,
+  gameSlug,
+}: {
+  section: GameSection;
+  gameSlug: string;
+}) => {
   const Header = styled.div`
     margin-bottom: var(--space-6);
     h3 {
@@ -481,26 +489,36 @@ export const SectionRenderer = ({ section }: { section: GameSection }) => {
       {(section.type === "grid_cards" ||
         section.type === "profile_carousel") && (
         <GridWrapper>
-          {section.items.map((item) => (
-            <Card key={item.id}>
-              {/* FIX: Pass image via inline style */}
-              <CardImage style={{ backgroundImage: `url(${item.image})` }}>
-                {item.tags?.map((t) => (
-                  <Tag key={t}>{t}</Tag>
-                ))}
-              </CardImage>
-              <CardContent>
-                <h4>{item.title}</h4>
-                {item.subtitle && <p className="sub">{item.subtitle}</p>}
-                <CardFooter>
-                  <div>
-                    <span className="from">From</span>
-                    <span className="price">${item.priceStart}</span>
-                  </div>
-                </CardFooter>
-              </CardContent>
-            </Card>
-          ))}
+          {section.items.map((item) => {
+            const cardContent = (
+              <Card key={item.id}>
+                {/* FIX: Pass image via inline style */}
+                <CardImage style={{ backgroundImage: `url(${item.image})` }}>
+                  {item.tags?.map((t) => (
+                    <Tag key={t}>{t}</Tag>
+                  ))}
+                </CardImage>
+                <CardContent>
+                  <h4>{item.title}</h4>
+                  {item.subtitle && <p className="sub">{item.subtitle}</p>}
+                  <CardFooter>
+                    <div>
+                      <span className="from">From</span>
+                      <span className="price">${item.priceStart}</span>
+                    </div>
+                  </CardFooter>
+                </CardContent>
+              </Card>
+            );
+
+            return item.slug ? (
+              <Link key={item.id} href={`/games/${gameSlug}/${item.slug}`}>
+                {cardContent}
+              </Link>
+            ) : (
+              cardContent
+            );
+          })}
         </GridWrapper>
       )}
 

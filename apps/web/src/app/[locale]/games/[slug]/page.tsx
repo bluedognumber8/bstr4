@@ -135,7 +135,7 @@ function BlueprintView({ blueprint }: { blueprint: GamePageConfig }) {
 
       <MainContent>
         {activeTab.sections.map((section) => (
-          <SectionRenderer key={section.id} section={section} />
+          <SectionRenderer key={section.id} section={section} gameSlug={blueprint.gameSlug} />
         ))}
       </MainContent>
     </PageContainer>

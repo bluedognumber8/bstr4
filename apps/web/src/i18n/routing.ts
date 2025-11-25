@@ -46,5 +46,19 @@ export const routing = defineRouting({
     "/categories/[...slug]": {
       fr: "/kategorien/[...slug]",
     },
+
+    // Game routes
+    "/games": "/games",
+
+    // Footer routes
+    "/hardware": "/hardware",
+    "/merch": "/merch",
+    "/gift-cards": "/gift-cards",
+    "/help": "/help",
+    "/returns": "/returns",
+    "/shipping": "/shipping",
+    "/contact": "/contact",
+    "/privacy": "/privacy",
+    "/terms": "/terms",
   },
 });

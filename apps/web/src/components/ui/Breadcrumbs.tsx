@@ -2,7 +2,7 @@
 
 import { styled } from "next-yak";
 import { ChevronRight, Home } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { Fragment } from "react";
 
 // --- STYLES ---

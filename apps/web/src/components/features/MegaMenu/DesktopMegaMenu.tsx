@@ -7,6 +7,55 @@ import { FaChevronDown } from "react-icons/fa";
 import { queries, zIndex } from "@/config/theme";
 import { useState, useRef } from "react";
 
+// --- COMPONENT ---
+export const DesktopMegaMenu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => setIsOpen(false), 150); // Small delay prevents flickering
+  };
+
+  return (
+    <MenuContainer
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <MenuTrigger $isOpen={isOpen} aria-expanded={isOpen}>
+        All Games
+        <FaChevronDown />
+      </MenuTrigger>
+
+      {isOpen && (
+        <MegaDropdown>
+          <GridContainer>
+            {MEGA_MENU_DATA.map((cat) => (
+              <CategoryColumn key={cat.title}>
+                <CategoryTitle>
+                  <cat.icon size={16} />
+                  {cat.title}
+                </CategoryTitle>
+                {cat.items.map((game) => (
+                  <GameLinkItem key={game.href} href={game.href}>
+                    {game.label}
+                    {game.isHot && <Badge $variant="hot">HOT</Badge>}
+                    {game.isNew && <Badge $variant="new">NEW</Badge>}
+                  </GameLinkItem>
+                ))}
+              </CategoryColumn>
+            ))}
+          </GridContainer>
+        </MegaDropdown>
+      )}
+    </MenuContainer>
+  );
+};
+
 // --- ANIMATIONS ---
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(-10px); }
@@ -116,52 +165,3 @@ const Badge = styled.span<{ $variant: "hot" | "new" }>`
     props.$variant === "hot" ? "var(--color-danger)" : "var(--color-info)"};
   color: white;
 `;
-
-// --- COMPONENT ---
-export const DesktopMegaMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const handleMouseEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setIsOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = setTimeout(() => setIsOpen(false), 150); // Small delay prevents flickering
-  };
-
-  return (
-    <MenuContainer
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <MenuTrigger $isOpen={isOpen} aria-expanded={isOpen}>
-        All Games
-        <FaChevronDown />
-      </MenuTrigger>
-
-      {isOpen && (
-        <MegaDropdown>
-          <GridContainer>
-            {MEGA_MENU_DATA.map((cat) => (
-              <CategoryColumn key={cat.title}>
-                <CategoryTitle>
-                  <cat.icon size={16} />
-                  {cat.title}
-                </CategoryTitle>
-                {cat.items.map((game) => (
-                  <GameLinkItem key={game.href} href={game.href}>
-                    {game.label}
-                    {game.isHot && <Badge $variant="hot">HOT</Badge>}
-                    {game.isNew && <Badge $variant="new">NEW</Badge>}
-                  </GameLinkItem>
-                ))}
-              </CategoryColumn>
-            ))}
-          </GridContainer>
-        </MegaDropdown>
-      )}
-    </MenuContainer>
-  );
-};

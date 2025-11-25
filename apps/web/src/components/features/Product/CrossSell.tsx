@@ -126,8 +126,8 @@ export const CrossSell = ({ relatedIds }: { relatedIds?: string[] }) => {
               <Info>
                 <Name>{item.title}</Name>
                 <Price>
-                  <s>${item.price}</s>
-                  <strong>${(item.price * 0.9).toFixed(2)}</strong>
+                  <s>${item.basePrice}</s>
+                  <strong>${(item.basePrice * 0.9).toFixed(2)}</strong>
                 </Price>
               </Info>
             </MiniCard>
@@ -138,7 +138,7 @@ export const CrossSell = ({ relatedIds }: { relatedIds?: string[] }) => {
                 addItem({
                   productId: item.id,
                   title: item.title,
-                  price: item.price * 0.9, // Apply discount logic here
+                  price: item.basePrice * 0.9, // Apply discount logic here
                   image: item.image,
                   quantity: 1,
                   category: "service",

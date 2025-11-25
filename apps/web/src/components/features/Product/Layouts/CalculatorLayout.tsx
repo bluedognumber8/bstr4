@@ -9,7 +9,7 @@ import { ProductFAQ } from "../ProductFAQ";
 import { ReviewWall } from "../ReviewWall";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Badge } from "@/components/ui/Badge";
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 import { queries } from "@/config/theme";
 
 const Container = styled.div`

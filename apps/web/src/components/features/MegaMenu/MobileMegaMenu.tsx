@@ -6,48 +6,6 @@ import { useState } from "react";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import { MEGA_MENU_DATA } from "./menu-data";
 
-const AccordionHeader = styled.button`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: none;
-  border: none;
-  padding: var(--space-2) 0;
-
-  font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 1rem;
-  color: var(--fg-secondary);
-  cursor: pointer;
-`;
-
-const SubMenu = styled.div<{ $isOpen: boolean }>`
-  display: ${(props) => (props.$isOpen ? "flex" : "none")};
-  flex-direction: column;
-  padding-left: var(--space-4);
-  gap: var(--space-3);
-  margin-top: var(--space-2);
-  border-left: 2px solid var(--border-subtle);
-`;
-
-const CategoryLabel = styled.div`
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--fg-muted);
-  text-transform: uppercase;
-  margin-top: var(--space-2);
-`;
-
-const MobileLink = styled(Link)`
-  text-decoration: none;
-  color: var(--fg-primary);
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 export const MobileMegaMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -92,3 +50,45 @@ export const MobileMegaMenu = () => {
     </div>
   );
 };
+
+const AccordionHeader = styled.button`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: var(--space-2) 0;
+
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--fg-secondary);
+  cursor: pointer;
+`;
+
+const SubMenu = styled.div<{ $isOpen: boolean }>`
+  display: ${(props) => (props.$isOpen ? "flex" : "none")};
+  flex-direction: column;
+  padding-left: var(--space-4);
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+  border-left: 2px solid var(--border-subtle);
+`;
+
+const CategoryLabel = styled.div`
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  margin-top: var(--space-2);
+`;
+
+const MobileLink = styled(Link)`
+  text-decoration: none;
+  color: var(--fg-primary);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;

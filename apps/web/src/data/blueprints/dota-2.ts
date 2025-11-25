@@ -57,41 +57,45 @@ export const DOTA_BLUEPRINT: GamePageConfig = {
             "Push your rank to Immortal with verified pros (8000+ MMR).",
           type: "grid_cards",
           items: [
-            {
-              id: "mmr-boost",
-              title: "Solo MMR Boost",
-              subtitle: "Up to 12,000 MMR",
-              priceStart: 15,
-              image:
-                "https://images.unsplash.com/photo-1624138784181-dc7f5b75e52e?w=500",
-              tags: ["Best Seller"],
-            },
-            {
-              id: "calibration",
-              title: "Seasonal Calibration",
-              subtitle: "10 Games | Guaranteed Winrate",
-              priceStart: 35,
-              image:
-                "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500",
-              tags: ["High Priority"],
-            },
-            {
-              id: "duo-queue",
-              title: "Duo with Pro",
-              subtitle: "No Account Sharing",
-              priceStart: 25,
-              image:
-                "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500",
-              tags: ["Safe"],
-            },
-            {
-              id: "net-wins",
-              title: "Net Wins Boost",
-              subtitle: "Pay for +MMR only",
-              priceStart: 4,
-              image:
-                "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500",
-            },
+             {
+               id: "mmr-boost",
+               title: "Solo MMR Boost",
+               subtitle: "Up to 12,000 MMR",
+               priceStart: 15,
+               image:
+                 "https://images.unsplash.com/photo-1624138784181-dc7f5b75e52e?w=500",
+               tags: ["Best Seller"],
+               slug: "mmr-boost",
+             },
+             {
+               id: "calibration",
+               title: "Seasonal Calibration",
+               subtitle: "10 Games | Guaranteed Winrate",
+               priceStart: 35,
+               image:
+                 "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=500",
+               tags: ["High Priority"],
+               slug: "placement-matches",
+             },
+             {
+               id: "duo-queue",
+               title: "Duo with Pro",
+               subtitle: "No Account Sharing",
+               priceStart: 25,
+               image:
+                 "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500",
+               tags: ["Safe"],
+               slug: "mmr-boost", // Using existing product as placeholder
+             },
+             {
+               id: "net-wins",
+               title: "Net Wins Boost",
+               subtitle: "Pay for +MMR only",
+               priceStart: 4,
+               image:
+                 "https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=500",
+               slug: "mmr-boost", // Using existing product as placeholder
+             },
           ],
         },
         // B. BATTLE CUP (FunPay Special)
@@ -101,32 +105,35 @@ export const DOTA_BLUEPRINT: GamePageConfig = {
           description: "Guaranteed trophies this Saturday. Choose your Tier.",
           type: "grid_cards",
           items: [
-            {
-              id: "bc-tier8",
-              title: "Tier 8 Champion",
-              subtitle: "10k+ MMR Team | 100% Win",
-              priceStart: 20,
-              image:
-                "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=500",
-              tags: ["Hardcore"],
-            },
-            {
-              id: "bc-tier7",
-              title: "Tier 7 Victory",
-              subtitle: "Ancient/Divine Bracket",
-              priceStart: 15,
-              image:
-                "https://images.unsplash.com/photo-1635321349667-c653e11c1631?w=500",
-            },
-            {
-              id: "bc-stack",
-              title: "Play with your Stack",
-              subtitle: "We provide the Smurf Carry",
-              priceStart: 30,
-              image:
-                "https://images.unsplash.com/photo-1533236897111-512022dd1c0c?w=500",
-              tags: ["Co-op"],
-            },
+             {
+               id: "bc-tier8",
+               title: "Tier 8 Champion",
+               subtitle: "10k+ MMR Team | 100% Win",
+               priceStart: 20,
+               image:
+                 "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=500",
+               tags: ["Hardcore"],
+               slug: "mmr-boost", // Using existing product as placeholder
+             },
+             {
+               id: "bc-tier7",
+               title: "Tier 7 Victory",
+               subtitle: "Ancient/Divine Bracket",
+               priceStart: 15,
+               image:
+                 "https://images.unsplash.com/photo-1635321349667-c653e11c1631?w=500",
+               slug: "mmr-boost", // Using existing product as placeholder
+             },
+             {
+               id: "bc-stack",
+               title: "Play with your Stack",
+               subtitle: "We provide the Smurf Carry",
+               priceStart: 30,
+               image:
+                 "https://images.unsplash.com/photo-1533236897111-512022dd1c0c?w=500",
+               tags: ["Co-op"],
+               slug: "mmr-boost", // Using existing product as placeholder
+             },
           ],
         },
       ],
