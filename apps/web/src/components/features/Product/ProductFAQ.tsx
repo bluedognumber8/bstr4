@@ -62,12 +62,11 @@ const AnswerContent = styled.div`
 
 interface Props {
   gameSlug: string;
-  categorySlug: string;
 }
 
-export const ProductFAQ = ({ gameSlug, categorySlug }: Props) => {
-  // 1. Fetch Data based on props
-  const items = getFAQs(gameSlug, categorySlug);
+export const ProductFAQ = ({ gameSlug }: Props) => {
+  // 1. Fetch Data based on props (game-level FAQs)
+  const items = getFAQs(gameSlug);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   if (items.length === 0) return null;

@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { styled } from "next-yak";
-import { Product } from "@/data/types"; // <--- UPDATED IMPORT
+import { CatalogueProduct } from "@/data/catalogue";
 import { useCartStore } from "@/store/useCartStore";
 import { toast } from "sonner";
 import { ShoppingCart, Minus, Plus, ShieldCheck, Package } from "lucide-react";
@@ -154,7 +154,7 @@ const GuaranteeText = styled.div`
 // --- COMPONENT ---
 
 interface Props {
-  product: Product;
+  product: CatalogueProduct;
 }
 
 export const QuantitySelector = ({ product }: Props) => {

@@ -3,19 +3,17 @@ export interface FAQItem {
   answer: string;
 }
 
-export interface CategoryFAQ {
+export interface GameFAQ {
   id: string;
   gameSlug: string;
-  categorySlug: string; // Matches the URL category
   items: FAQItem[];
 }
 
-export const MOCK_FAQS: CategoryFAQ[] = [
-  // --- WORLD OF WARCRAFT: GOLD ---
+export const MOCK_FAQS: GameFAQ[] = [
+  // --- WORLD OF WARCRAFT ---
   {
-    id: "wow-gold",
+    id: "wow",
     gameSlug: "world-of-warcraft",
-    categorySlug: "gold",
     items: [
       {
         question: "How is the gold delivered?",
@@ -23,24 +21,10 @@ export const MOCK_FAQS: CategoryFAQ[] = [
           "We support multiple delivery methods including In-Game Mail (safest), Face-to-Face trade, and Guild Bank deposit. You can select your preferred method at checkout.",
       },
       {
-        question: "Is it safe to buy WoW Gold?",
+        question: "Is it safe to buy WoW services?",
         answer:
-          "Yes. We only use hand-farmed gold from real players. We do not use bots or exploits, which drastically reduces the risk of suspension.",
+          "Yes. We only use hand-farmed gold and professional boosters. We do not use bots or exploits, which drastically reduces the risk of suspension.",
       },
-      {
-        question: "How long does delivery take?",
-        answer:
-          "Most orders are delivered within 15-60 minutes. If we are out of stock on your specific realm, it may take up to 24 hours (you will be notified).",
-      },
-    ],
-  },
-
-  // --- WORLD OF WARCRAFT: BOOSTING (Dungeons/Raids) ---
-  {
-    id: "wow-boosting",
-    gameSlug: "world-of-warcraft",
-    categorySlug: "boosting", // Also applies to dungeons usually
-    items: [
       {
         question: "Do I need to share my account?",
         answer:
@@ -54,30 +38,10 @@ export const MOCK_FAQS: CategoryFAQ[] = [
     ],
   },
 
-  // Map 'dungeons' to the same FAQs if needed, or create specific ones
+  // --- VALORANT ---
   {
-    id: "wow-dungeons",
-    gameSlug: "world-of-warcraft",
-    categorySlug: "dungeons",
-    items: [
-      {
-        question: "What happens if we fail the key?",
-        answer:
-          "We guarantee completion. If the group depletes the key or fails the timer (if Timed was selected), we will run it again until the criteria are met for free.",
-      },
-      {
-        question: "Do I need to do damage?",
-        answer:
-          "In standard runs, you can tag along. For high keys (+20 and above), you might be expected to know basic mechanics, but our team carries the DPS load.",
-      },
-    ],
-  },
-
-  // --- VALORANT: BOOSTING ---
-  {
-    id: "val-boosting",
+    id: "valorant",
     gameSlug: "valorant",
-    categorySlug: "boosting",
     items: [
       {
         question: "Will my friends see me online?",
@@ -97,11 +61,10 @@ export const MOCK_FAQS: CategoryFAQ[] = [
     ],
   },
 
-  // --- DIABLO 4: BOSSES ---
+  // --- DIABLO 4 ---
   {
-    id: "d4-bosses",
+    id: "diablo-4",
     gameSlug: "diablo-4",
-    categorySlug: "bosses",
     items: [
       {
         question: "Do I need to provide summoning mats?",
@@ -115,12 +78,51 @@ export const MOCK_FAQS: CategoryFAQ[] = [
       },
     ],
   },
+
+  // --- DOTA 2 ---
+  {
+    id: "dota-2",
+    gameSlug: "dota-2",
+    items: [
+      {
+        question: "How long does MMR boosting take?",
+        answer:
+          "Typically 100-200 MMR per day depending on starting bracket. High Immortal orders may take longer due to queue times.",
+      },
+      {
+        question: "Will my behavior score be affected?",
+        answer:
+          "Our boosters maintain 10,000 behavior score and never abandon games. Your score will remain stable or improve.",
+      },
+      {
+        question: "Can I choose specific heroes?",
+        answer:
+          "Yes! You can request specific hero pools or roles. Additional fees may apply for hero restrictions.",
+      },
+    ],
+  },
+
+  // --- LEAGUE OF LEGENDS ---
+  {
+    id: "league-of-legends",
+    gameSlug: "league-of-legends",
+    items: [
+      {
+        question: "Will my LP be refunded if we lose?",
+        answer:
+          "Yes. We guarantee net wins. Losses during the boost don't count against your order - we continue until the win target is reached.",
+      },
+      {
+        question: "Can I duo with the booster?",
+        answer:
+          "Absolutely! Select 'Duo Boost' option and you'll play alongside our Challenger player on your own account.",
+      },
+    ],
+  },
 ];
 
-// Helper function to get FAQs
-export const getFAQs = (gameSlug: string, categorySlug: string) => {
-  const found = MOCK_FAQS.find(
-    (f) => f.gameSlug === gameSlug && f.categorySlug === categorySlug
-  );
+// Helper function to get FAQs by game
+export const getFAQs = (gameSlug: string): FAQItem[] => {
+  const found = MOCK_FAQS.find((f) => f.gameSlug === gameSlug);
   return found?.items || [];
 };

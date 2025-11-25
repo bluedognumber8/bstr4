@@ -2,7 +2,7 @@
 "use client";
 import Image from "next/image";
 import { styled } from "next-yak";
-import { Game, Product } from "@/data/mock-games";
+import { CatalogueGame, CatalogueProduct } from "@/data/catalogue";
 import { CalculatorRegistry } from "../../Calculators/CalculatorRegistry";
 import { ProductFAQ } from "../ProductFAQ";
 import { ReviewWall } from "../ReviewWall";
@@ -66,22 +66,17 @@ const Description = styled.div`
 `;
 
 interface Props {
-  game: Game;
-  product: Product;
-  categorySlug: string;
+  game: CatalogueGame;
+  product: CatalogueProduct;
 }
 
-export const FixedProductLayout = ({ game, product, categorySlug }: Props) => {
-  const categoryName =
-    game.categories.find((c) => c.slug === categorySlug)?.name || categorySlug;
-
+export const FixedProductLayout = ({ game, product }: Props) => {
   return (
     <Container>
       <Breadcrumbs
         items={[
           { label: "Games", href: "/games" },
           { label: game.name, href: `/games/${game.slug}` },
-          { label: categoryName, href: `/games/${game.slug}/${categorySlug}` },
           { label: product.title, href: undefined },
         ]}
       />
@@ -89,14 +84,14 @@ export const FixedProductLayout = ({ game, product, categorySlug }: Props) => {
       <Grid>
         <MainContent>
           <Link
-            href={`/games/${game.slug}/${categorySlug}`}
+            href={`/games/${game.slug}`}
             style={{
               textDecoration: "none",
               display: "inline-block",
               marginBottom: 12,
             }}
           >
-            <Badge variant="primary">{categoryName}</Badge>
+            <Badge variant="primary">{game.name}</Badge>
           </Link>
 
           <ProductTitle>{product.title}</ProductTitle>
@@ -117,10 +112,7 @@ export const FixedProductLayout = ({ game, product, categorySlug }: Props) => {
             <p>{product.description || "Instant delivery via secure trade."}</p>
           </Description>
 
-          <ProductFAQ
-            gameSlug={product.gameSlug}
-            categorySlug={product.categorySlug}
-          />
+          <ProductFAQ gameSlug={product.gameSlug} />
           <ReviewWall />
         </MainContent>
 

@@ -1,4 +1,4 @@
-import { MOCK_GAMES } from "@/data/mock-games";
+import { CATALOGUE_GAMES } from "@/data/catalogue";
 import { styled } from "next-yak";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
@@ -115,13 +115,13 @@ export default function GamesIndexPage() {
       </Header>
 
       <Grid>
-        {MOCK_GAMES.map((game) => (
+        {CATALOGUE_GAMES.map((game) => (
           <GameCard key={game.id} href={`/games/${game.slug}`}>
             <Cover style={{ backgroundImage: `url(${game.coverImage})` }} />
             <Info>
               <Name>{game.name}</Name>
               <ServiceCount>
-                {game.categories.length} Service Categories
+                {game.blueprint ? "View Services" : "Coming Soon"}
               </ServiceCount>
             </Info>
           </GameCard>

@@ -1,182 +1,181 @@
-import { notFound } from "next/navigation";
-import { MOCK_GAMES } from "@/data/mock-games";
+"use client";
+
+import { useState, use } from "react";
 import { styled } from "next-yak";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { Link } from "@/i18n/navigation";
-import { queries } from "@/config/theme";
-import * as Icons from "lucide-react"; // Dynamic Icons
+import { notFound } from "next/navigation";
+import * as Icons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-// --- STYLES ---
+import { getGame, getGameBlueprint, CatalogueGame } from "@/data/catalogue";
+import { GamePageConfig } from "@/components/engine/types";
+import {
+  HeroZone,
+  PulseBar,
+  SectionRenderer,
+} from "@/components/engine/EngineComponents";
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
-const Hero = styled.div`
-  position: relative;
-  height: 400px;
+// --- STYLED COMPONENTS ---
+
+const PageContainer = styled.div`
+  background-color: var(--bg-canvas);
+  min-height: 100vh;
+  padding-bottom: var(--space-16);
+`;
+
+const StickyNav = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: var(--bg-canvas);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+`;
+
+const NavContainer = styled.div`
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+  display: flex;
+  gap: var(--space-8);
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+`;
+
+const TabButton = styled.button<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: white;
-  overflow: hidden;
+  gap: var(--space-2);
+  padding: var(--space-5) 0;
+  border-bottom: 2px solid
+    ${(props) => (props.$isActive ? "var(--fg-primary)" : "transparent")};
+  color: ${(props) =>
+    props.$isActive ? "var(--fg-primary)" : "var(--fg-muted)"};
+  font-weight: ${(props) => (props.$isActive ? "700" : "500")};
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+  cursor: pointer;
 
-  /* Gradient overlay for text readability */
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      var(--bg-canvas) 100%
-    );
-    z-index: 1;
+  &:hover {
+    color: var(--fg-primary);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
   }
 `;
 
-// 2. New Component for the Background Image
-// We render this as a separate div so we can style it easily
-const HeroBackground = styled.div`
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.4);
-  z-index: 0;
-`;
-
-const HeroContent = styled.div`
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  margin-top: 40px;
-`;
-
-const GameTitle = styled.h1`
-  font-family: var(--font-heading);
-  font-size: 3rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-`;
-
-const Container = styled.div`
+const MainContent = styled.main`
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px 80px;
-  position: relative;
-  z-index: 3;
-  margin-top: -60px;
+  padding: var(--space-10) var(--space-5);
 `;
 
-const CategoryGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-`;
-
-const CategoryCard = styled(Link)`
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 32px;
+const ComingSoonContainer = styled.div`
+  min-height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-
-  &:hover {
-    transform: translateY(-5px);
-    border-color: var(--action-primary);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const IconBox = styled.div`
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--bg-surface-hover);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
-  color: var(--action-primary);
+  text-align: center;
+  padding: var(--space-10);
 `;
 
-const CatName = styled.h3`
-  font-size: 1.25rem;
-  font-weight: 700;
+const ComingSoonTitle = styled.h1`
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
   color: var(--fg-primary);
-  margin-bottom: 8px;
+  margin-bottom: var(--space-4);
 `;
 
-const CatDesc = styled.p`
-  font-size: 0.9rem;
+const ComingSoonText = styled.p`
+  font-size: 1.1rem;
   color: var(--fg-secondary);
 `;
 
-interface Props {
-  params: Promise<{ slug: string }>;
-}
+// --- HELPER FOR ICONS ---
+const Icon = ({ name }: { name: string }) => {
+  const LucideIcon = (Icons[name as keyof typeof Icons] as LucideIcon) || Icons.Circle;
+  return <LucideIcon />;
+};
 
-export default async function GameHubPage({ params }: Props) {
-  const { slug } = await params;
-  const game = MOCK_GAMES.find((g) => g.slug === slug);
-
-  if (!game) notFound();
+// --- BLUEPRINT VIEW COMPONENT (extracted to avoid conditional hooks) ---
+function BlueprintView({ blueprint }: { blueprint: GamePageConfig }) {
+  const [activeTabId, setActiveTabId] = useState(blueprint.tabs[0].id);
+  const activeTab =
+    blueprint.tabs.find((t) => t.id === activeTabId) || blueprint.tabs[0];
 
   return (
-    <main>
-      {/* 1. Immersive Hero */}
-      <Hero>
-        {/* Pass URL via inline style (Safe & Performant) */}
-        <HeroBackground
-          style={{ backgroundImage: `url(${game.coverImage})` }}
-        />
+    <PageContainer>
+      <HeroZone config={blueprint} />
+      <PulseBar items={blueprint.pulse} />
 
-        <HeroContent>
-          <GameTitle style={{ color: game.primaryColor }}>
-            {game.name}
-          </GameTitle>
-          <p style={{ fontSize: "1.2rem", opacity: 0.9 }}>
-            Select a service category below
-          </p>
-        </HeroContent>
-      </Hero>
+      <StickyNav>
+        <NavContainer>
+          {blueprint.tabs.map((tab) => (
+            <TabButton
+              key={tab.id}
+              $isActive={tab.id === activeTabId}
+              onClick={() => setActiveTabId(tab.id)}
+            >
+              {tab.icon && <Icon name={tab.icon} />}
+              {tab.label}
+            </TabButton>
+          ))}
+        </NavContainer>
+      </StickyNav>
 
-      {/* 2. Categories */}
-      <Container>
-        <Breadcrumbs
-          items={[
-            { label: "Games", href: "/games" },
-            { label: game.name, href: undefined },
-          ]}
-        />
-
-        <CategoryGrid>
-          {game.categories.map((cat) => {
-            const IconComponent = (Icons as any)[cat.icon] || Icons.HelpCircle;
-
-            return (
-              <CategoryCard
-                key={cat.id}
-                href={`/games/${game.slug}/${cat.slug}`}
-              >
-                <IconBox>
-                  <IconComponent size={32} />
-                </IconBox>
-                <CatName>{cat.name}</CatName>
-                <CatDesc>{cat.description}</CatDesc>
-              </CategoryCard>
-            );
-          })}
-        </CategoryGrid>
-      </Container>
-    </main>
+      <MainContent>
+        {activeTab.sections.map((section) => (
+          <SectionRenderer key={section.id} section={section} />
+        ))}
+      </MainContent>
+    </PageContainer>
   );
+}
+
+// --- COMING SOON VIEW ---
+function ComingSoonView({ game }: { game: CatalogueGame }) {
+  return (
+    <PageContainer>
+      <ComingSoonContainer>
+        <ComingSoonTitle>{game.name}</ComingSoonTitle>
+        <ComingSoonText>
+          Services for this game are coming soon. Check back later!
+        </ComingSoonText>
+      </ComingSoonContainer>
+    </PageContainer>
+  );
+}
+
+// --- PAGE COMPONENT ---
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export default function GamePage({ params }: Props) {
+  const { slug } = use(params);
+
+  const game = getGame(slug);
+  const blueprint = getGameBlueprint(slug);
+
+  if (!game) {
+    return notFound();
+  }
+
+  // If no blueprint, show coming soon page
+  if (!blueprint) {
+    return <ComingSoonView game={game} />;
+  }
+
+  return <BlueprintView blueprint={blueprint} />;
 }

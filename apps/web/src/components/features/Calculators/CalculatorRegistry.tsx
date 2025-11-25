@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Product } from "@/data/types"; // Import from new types file
+import { CatalogueProduct } from "@/data/catalogue";
 import { LoadingContainer } from "@/components/ui/Loading";
 import { QuantitySelector } from "./shared/QuantitySelector";
 import { GenericSliderCalc } from "./shared/GenericSliderCalc";
@@ -17,7 +17,7 @@ const CUSTOM_MAP: Record<string, React.ComponentType<any>> = {
   "dota-mmr-boost": MMRCalculator,
 };
 
-export const CalculatorRegistry = ({ product }: { product: Product }) => {
+export const CalculatorRegistry = ({ product }: { product: CatalogueProduct }) => {
   const config = product.calculator;
 
   // 1. Custom Apps (Tier 3)

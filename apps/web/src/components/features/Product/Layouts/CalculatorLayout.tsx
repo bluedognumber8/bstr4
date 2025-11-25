@@ -2,7 +2,7 @@
 "use client";
 
 import { styled } from "next-yak";
-import { Game, Product } from "@/data/mock-games";
+import { CatalogueGame, CatalogueProduct } from "@/data/catalogue";
 import { CalculatorRegistry } from "../../Calculators/CalculatorRegistry";
 import { HowItWorks } from "../HowItWorks";
 import { ProductFAQ } from "../ProductFAQ";
@@ -60,34 +60,25 @@ const ContentGrid = styled.div`
 `;
 
 interface Props {
-  game: Game;
-  product: Product;
-  categorySlug: string;
+  game: CatalogueGame;
+  product: CatalogueProduct;
 }
 
-export const CalculatorLayout = ({ game, product, categorySlug }: Props) => {
-  // Find category name for breadcrumbs
-  const categoryName =
-    game.categories.find((c) => c.slug === categorySlug)?.name || categorySlug;
-
+export const CalculatorLayout = ({ game, product }: Props) => {
   return (
     <Container>
       <Breadcrumbs
         items={[
           { label: "Games", href: "/games" },
           { label: game.name, href: `/games/${game.slug}` },
-          { label: categoryName, href: `/games/${game.slug}/${categorySlug}` },
           { label: product.title, href: undefined },
         ]}
       />
 
       <Header>
-        <Link
-          href={`/games/${game.slug}/${categorySlug}`}
-          style={{ textDecoration: "none" }}
-        >
+        <Link href={`/games/${game.slug}`} style={{ textDecoration: "none" }}>
           <Badge variant="primary" className="mb-4">
-            {categoryName}
+            {game.name}
           </Badge>
         </Link>
         <Title>{product.title}</Title>
@@ -124,10 +115,7 @@ export const CalculatorLayout = ({ game, product, categorySlug }: Props) => {
             chat. Stop guessing where your booster is. Watch them play via our
             exclusive streaming integration.
           </p>
-          <ProductFAQ
-            gameSlug={product.gameSlug}
-            categorySlug={product.categorySlug}
-          />
+          <ProductFAQ gameSlug={product.gameSlug} />
         </div>
         <div>
           <ReviewWall />

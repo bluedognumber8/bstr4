@@ -3,7 +3,7 @@
 
 import { useState, useMemo } from "react";
 import { styled } from "next-yak";
-import { Product } from "@/data/types"; // <--- UPDATED IMPORT
+import { CatalogueProduct } from "@/data/catalogue";
 import { useCartStore } from "@/store/useCartStore";
 import { toast } from "sonner";
 import {
@@ -163,7 +163,7 @@ const GuaranteeText = styled.div`
 // --- COMPONENT ---
 
 interface Props {
-  product: Product;
+  product: CatalogueProduct;
 }
 
 export const GenericDropdownCalc = ({ product }: Props) => {

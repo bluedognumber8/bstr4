@@ -5,7 +5,7 @@ import { styled } from "next-yak";
 import { useState, useMemo, useEffect } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { Product } from "@/data/types"; // <--- UPDATED IMPORT
+import { CatalogueProduct } from "@/data/catalogue";
 import { useCartStore } from "@/store/useCartStore";
 import { toast } from "sonner";
 import { Zap, Eye, ShieldCheck } from "lucide-react";
@@ -153,7 +153,7 @@ const GuaranteeText = styled.div`
 
 // --- COMPONENT ---
 
-export const GenericSliderCalc = ({ product }: { product: Product }) => {
+export const GenericSliderCalc = ({ product }: { product: CatalogueProduct }) => {
   // 1. Destructure from new Types
   const { basePrice } = product;
   const {
