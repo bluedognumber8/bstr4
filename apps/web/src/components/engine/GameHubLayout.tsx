@@ -13,9 +13,11 @@ import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 
 // --- STYLES ---
 
+// IMPORTANT: No overflow:hidden on any parent for sticky to work
 const PageContainer = styled.div`
   background-color: var(--bg-canvas);
   min-height: 100vh;
+  /* DO NOT add overflow: hidden here */
 `;
 
 const MainContent = styled.main`
@@ -37,17 +39,27 @@ interface Props {
 }
 
 export const GameHubLayout = ({ blueprint }: Props) => {
-  const { gameSlug, gameName, trustBar, hero, tabs: blueprintTabs, sections: blueprintSections, seo } = blueprint;
+  const {
+    gameSlug,
+    gameName,
+    trustBar,
+    hero,
+    tabs: blueprintTabs,
+    sections: blueprintSections,
+    seo,
+  } = blueprint;
 
-  // Flatten sections from blueprint tabs if sections is not provided separately
-  const sections = blueprintSections || blueprintTabs.flatMap(tab => (tab as any).sections || []);
+  // Use sections directly from blueprint
+  const sections = blueprintSections || [];
 
   // Transform blueprint tabs to CategoryTabs format
-  const tabs = blueprintTabs.map(tab => ({
+  // Make sure anchor matches the section id
+  const tabs = blueprintTabs.map((tab) => ({
     id: tab.id,
     label: tab.label,
     icon: tab.icon,
-    anchor: (tab as any).sections?.[0]?.id || tab.id,
+    anchor: tab.anchor, // Use the anchor directly from tab config
+    productCount: tab.productCount,
   }));
 
   // Breadcrumb items

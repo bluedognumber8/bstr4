@@ -6,16 +6,31 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import * as Icons from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { CategoryTab } from "./types";
+import { layout } from "@/config/theme";
 
 // --- STYLES ---
 
-const StickyWrapper = styled.div`
+const StickyWrapper = styled.nav`
   position: sticky;
-  top: 0;
-  z-index: 40;
+  top: ${layout.headerHeight}; /* Account for main site header */
+  z-index: 30;
   background-color: var(--bg-canvas);
   border-bottom: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Ensure sticky works */
+  width: 100%;
+
+  /* Add shadow when stuck */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), transparent);
+    pointer-events: none;
+  }
 `;
 
 const Container = styled.div`
@@ -93,8 +108,8 @@ export const CategoryTabs = ({ tabs, defaultActive }: Props) => {
   const handleTabClick = useCallback((anchor: string) => {
     const element = document.getElementById(anchor);
     if (element) {
-      // Account for sticky header height
-      const headerOffset = 80;
+      // Account for sticky header height + tabs height
+      const headerOffset = 72 + 56; // header + tabs
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
@@ -110,34 +125,40 @@ export const CategoryTabs = ({ tabs, defaultActive }: Props) => {
   }, []);
 
   // Keyboard navigation handler
-  const handleKeyDown = useCallback((event: React.KeyboardEvent) => {
-    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
-      event.preventDefault();
-      const currentIndex = tabs.findIndex(tab => tab.anchor === activeTab);
-      if (currentIndex === -1) return;
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        const currentIndex = tabs.findIndex((tab) => tab.anchor === activeTab);
+        if (currentIndex === -1) return;
 
-      let newIndex;
-      if (event.key === "ArrowLeft") {
-        newIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
-      } else {
-        newIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+        let newIndex;
+        if (event.key === "ArrowLeft") {
+          newIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+        } else {
+          newIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+        }
+
+        const newTab = tabs[newIndex];
+        if (newTab) {
+          handleTabClick(newTab.anchor);
+        }
       }
+    },
+    [activeTab, tabs, handleTabClick]
+  );
 
-      const newTab = tabs[newIndex];
-      if (newTab) {
-        handleTabClick(newTab.anchor);
-      }
-    }
-  }, [activeTab, tabs, handleTabClick]);
-
-  // Auto-center active tab in container (only when not focused for keyboard nav)
+  // Auto-center active tab in container
   useEffect(() => {
     if (!containerRef.current) return;
 
     const activeButton = containerRef.current.querySelector(
       `[data-anchor="${activeTab}"]`
     );
-    if (activeButton && !containerRef.current.contains(document.activeElement)) {
+    if (
+      activeButton &&
+      !containerRef.current.contains(document.activeElement)
+    ) {
       activeButton.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -148,10 +169,12 @@ export const CategoryTabs = ({ tabs, defaultActive }: Props) => {
 
   // Intersection Observer to update active tab on scroll
   useEffect(() => {
-    // Disconnect existing observer
     if (observerRef.current) {
       observerRef.current.disconnect();
     }
+
+    // Calculate offset for observer (header + tabs height)
+    const topOffset = 72 + 56 + 20; // header + tabs + buffer
 
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -162,7 +185,7 @@ export const CategoryTabs = ({ tabs, defaultActive }: Props) => {
         });
       },
       {
-        rootMargin: "-100px 0px -70% 0px",
+        rootMargin: `-${topOffset}px 0px -60% 0px`,
         threshold: 0,
       }
     );
@@ -185,19 +208,22 @@ export const CategoryTabs = ({ tabs, defaultActive }: Props) => {
     const hash = window.location.hash.slice(1);
     if (hash && tabs.some((t) => t.anchor === hash)) {
       setActiveTab(hash);
-      // Slight delay to ensure DOM is ready
       setTimeout(() => {
         handleTabClick(hash);
       }, 100);
     }
   }, [tabs, handleTabClick]);
 
+  if (tabs.length === 0) return null;
+
   return (
-    <StickyWrapper>
+    <StickyWrapper role="tablist" aria-label="Category navigation">
       <Container ref={containerRef} onKeyDown={handleKeyDown} tabIndex={0}>
         {tabs.map((tab) => (
           <TabButton
             key={tab.id}
+            role="tab"
+            aria-selected={activeTab === tab.anchor}
             $isActive={activeTab === tab.anchor}
             onClick={() => handleTabClick(tab.anchor)}
             data-anchor={tab.anchor}
