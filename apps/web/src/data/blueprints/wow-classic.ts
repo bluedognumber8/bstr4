@@ -1,6 +1,6 @@
-import { GamePageConfig } from "@/components/engine/types";
+import { GamePageBlueprint } from "@/components/engine/types";
 
-export const WOW_CLASSIC_BLUEPRINT: GamePageConfig = {
+export const WOW_CLASSIC_BLUEPRINT: GamePageBlueprint = {
   gameSlug: "wow-classic",
   theme: {
     primaryColor: "#c69b6d", // Classic Brown/Tan
@@ -12,11 +12,14 @@ export const WOW_CLASSIC_BLUEPRINT: GamePageConfig = {
   hero: {
     title: "Return to Azeroth",
     subtitle: "Services for Season of Discovery, Hardcore, and Era Realms.",
-    widgetConfig: {
+    variant: "currency_calculator",
+    backgroundImage: "https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=2500&auto=format&fit=crop",
+    currencyConfig: {
       label: "Level Boost (1-60)",
       min: 1,
       max: 60,
       unit: "Levels",
+      step: 1,
       pricePerUnit: 3.5, // More expensive per level in Classic
     },
   },

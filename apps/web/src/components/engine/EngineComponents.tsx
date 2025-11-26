@@ -5,7 +5,7 @@ import { styled } from "next-yak";
 import { useState } from "react";
 import * as Icons from "lucide-react";
 import Link from "next/link";
-import { GamePageConfig, GameSection, ProductCard, PulseItem } from "./types";
+import { GamePageBlueprint, GameSection, ProductCardData } from "./types";
 
 // --- UTILS ---
 const Icon = ({ name, className }: { name: string; className?: string }) => {
@@ -173,7 +173,7 @@ const CalcFooter = styled.div`
   }
 `;
 
-export const HeroZone = ({ config }: { config: GamePageConfig }) => {
+export const HeroZone = ({ config }: { config: GamePageBlueprint }) => {
   const [val, setVal] = useState(5000);
 
   return (
@@ -192,18 +192,18 @@ export const HeroZone = ({ config }: { config: GamePageConfig }) => {
         <CalculatorWidget>
           <WidgetTitle>
             <Icon name="Calculator" className="w-5 h-5" />
-            {config.hero.widgetConfig.label}
+            {config.hero.currencyConfig?.label}
           </WidgetTitle>
 
           <CalcDisplay>
             <span className="value">{val}</span>
-            <span className="unit">{config.hero.widgetConfig.unit}</span>
+            <span className="unit">{config.hero.currencyConfig?.unit}</span>
           </CalcDisplay>
 
           <StyledRange
             type="range"
-            min={config.hero.widgetConfig.min}
-            max={config.hero.widgetConfig.max}
+            min={config.hero.currencyConfig?.min || 0}
+            max={config.hero.currencyConfig?.max || 100}
             value={val}
             onChange={(e) => setVal(Number(e.target.value))}
           />
@@ -211,7 +211,7 @@ export const HeroZone = ({ config }: { config: GamePageConfig }) => {
           <CalcFooter>
             <span className="label">Estimated Price</span>
             <span className="price">
-              ${(val * config.hero.widgetConfig.pricePerUnit).toFixed(2)}
+              ${(val * (config.hero.currencyConfig?.pricePerUnit || 0)).toFixed(2)}
             </span>
           </CalcFooter>
         </CalculatorWidget>

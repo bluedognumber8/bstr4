@@ -1,6 +1,6 @@
-import { GamePageConfig } from "@/components/engine/types";
+import { GamePageBlueprint } from "@/components/engine/types";
 
-export const DOTA_BLUEPRINT: GamePageConfig = {
+export const DOTA_BLUEPRINT: GamePageBlueprint = {
   gameSlug: "dota-2",
   theme: {
     primaryColor: "#e33e2b", // Dota Red
@@ -14,11 +14,14 @@ export const DOTA_BLUEPRINT: GamePageConfig = {
     title: "Ascend the Ancients",
     subtitle:
       "The world's largest ecosystem for Dota 2 services. From Immortal boosting to Tier 8 Battle Cup victories.",
-    widgetConfig: {
+    variant: "currency_calculator",
+    backgroundImage: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2835&auto=format&fit=crop",
+    currencyConfig: {
       label: "Calculate MMR Boost",
       min: 0,
       max: 12000,
       unit: "MMR",
+      step: 100,
       pricePerUnit: 0.012, // ~$12 per 1000 MMR (avg base)
     },
   },

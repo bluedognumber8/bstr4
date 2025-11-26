@@ -1,6 +1,6 @@
-import { GamePageConfig } from "@/components/engine/types";
+import { GamePageBlueprint } from "@/components/engine/types";
 
-export const WOW_RETAIL_BLUEPRINT: GamePageConfig = {
+export const WOW_RETAIL_BLUEPRINT: GamePageBlueprint = {
   gameSlug: "wow-retail", // Distinct slug
   theme: {
     primaryColor: "#0074e0", // Alliance Blue / Retail Polish
@@ -12,11 +12,14 @@ export const WOW_RETAIL_BLUEPRINT: GamePageConfig = {
   hero: {
     title: "The War Within",
     subtitle: "Retail Gold, Nerub-ar Palace Carries & Mythic+ IO Boosting.",
-    widgetConfig: {
+    variant: "currency_calculator",
+    backgroundImage: "https://images.unsplash.com/photo-1592439272693-c56a0d123811?q=80&w=2500&auto=format&fit=crop",
+    currencyConfig: {
       label: "Buy Gold (100k)",
       min: 1,
       max: 500,
       unit: "x 100k",
+      step: 1,
       pricePerUnit: 4.5, // ~$4.50 based on your ~400-600 RUB
     },
   },

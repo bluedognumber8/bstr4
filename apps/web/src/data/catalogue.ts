@@ -1,7 +1,7 @@
 // src/data/catalogue.ts
 // Unified data layer combining blueprints and products
 
-import { GamePageConfig } from "@/components/engine/types";
+import { GamePageBlueprint } from "@/components/engine/types";
 import { Product, CalculatorConfig } from "./types";
 import { DOTA_BLUEPRINT } from "./blueprints/dota-2";
 import { WOW_RETAIL_BLUEPRINT } from "./blueprints/wow-retail";
@@ -13,11 +13,16 @@ export interface CatalogueGame {
   id: string;
   slug: string;
   name: string;
+  shortName: string;
   coverImage: string;
   icon: string;
   primaryColor: string;
+  isActive: boolean;
+  isFeatured: boolean;
+  displayOrder: number;
+  hasBlueprint: boolean;
   // Blueprint for the game's catalogue page
-  blueprint: GamePageConfig | null;
+  blueprint: GamePageBlueprint | null;
 }
 
 export interface CatalogueProduct {
@@ -40,60 +45,90 @@ export const CATALOGUE_GAMES: CatalogueGame[] = [
     id: "1",
     slug: "world-of-warcraft",
     name: "World of Warcraft",
+    shortName: "WoW",
     coverImage:
       "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&q=80",
     icon: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=100&q=80",
     primaryColor: "#f8b700",
+    isActive: true,
+    isFeatured: true,
+    displayOrder: 1,
+    hasBlueprint: true,
     blueprint: WOW_RETAIL_BLUEPRINT,
   },
   {
     id: "2",
     slug: "valorant",
     name: "Valorant",
+    shortName: "VAL",
     coverImage:
       "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=1200&q=80",
     icon: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=100&q=80",
     primaryColor: "#ff4655",
+    isActive: true,
+    isFeatured: true,
+    displayOrder: 2,
+    hasBlueprint: false,
     blueprint: null, // No blueprint yet
   },
   {
     id: "3",
     slug: "dota-2",
     name: "Dota 2",
+    shortName: "Dota",
     coverImage:
       "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=80",
     icon: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100&q=80",
     primaryColor: "#e33e2b",
+    isActive: true,
+    isFeatured: false,
+    displayOrder: 5,
+    hasBlueprint: true,
     blueprint: DOTA_BLUEPRINT,
   },
   {
     id: "4",
     slug: "diablo-4",
     name: "Diablo 4",
+    shortName: "D4",
     coverImage:
       "https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=1200&q=80",
     icon: "https://images.unsplash.com/photo-1605901309584-818e25960b8f?w=100&q=80",
     primaryColor: "#991b1b",
+    isActive: true,
+    isFeatured: false,
+    displayOrder: 4,
+    hasBlueprint: false,
     blueprint: null, // No blueprint yet
   },
   {
     id: "5",
     slug: "league-of-legends",
     name: "League of Legends",
+    shortName: "LoL",
     coverImage:
       "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=1200&q=80",
     icon: "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=100&q=80",
     primaryColor: "#0ea5e9",
+    isActive: true,
+    isFeatured: true,
+    displayOrder: 3,
+    hasBlueprint: false,
     blueprint: null, // No blueprint yet
   },
   {
     id: "6",
     slug: "wow-classic",
     name: "WoW Classic",
+    shortName: "WoW Classic",
     coverImage:
       "https://images.unsplash.com/photo-1592439272693-c56a0d123811?w=1200&q=80",
     icon: "https://images.unsplash.com/photo-1592439272693-c56a0d123811?w=100&q=80",
     primaryColor: "#d97706",
+    isActive: true,
+    isFeatured: false,
+    displayOrder: 6,
+    hasBlueprint: true,
     blueprint: WOW_CLASSIC_BLUEPRINT,
   },
 ];
@@ -259,7 +294,15 @@ export const getProductsForGame = (gameSlug: string): CatalogueProduct[] => {
   return CATALOGUE_PRODUCTS.filter((p) => p.gameSlug === gameSlug);
 };
 
-export const getGameBlueprint = (slug: string): GamePageConfig | null => {
+export const getGameBlueprint = (slug: string): GamePageBlueprint | null => {
   const game = getGame(slug);
   return game?.blueprint || null;
+};
+
+export const getActiveGames = (): CatalogueGame[] => {
+  return CATALOGUE_GAMES.filter((g) => g.isActive);
+};
+
+export const getFeaturedGames = (): CatalogueGame[] => {
+  return CATALOGUE_GAMES.filter((g) => g.isFeatured && g.isActive);
 };
