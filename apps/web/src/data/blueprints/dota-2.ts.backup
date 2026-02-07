@@ -2,7 +2,6 @@ import { GamePageBlueprint } from "@/components/engine/types";
 
 export const DOTA_BLUEPRINT: GamePageBlueprint = {
   gameSlug: "dota-2",
-  gameName: "Dota 2",
   theme: {
     primaryColor: "#e33e2b", // Dota Red
     // A darker, more epic background image (Roshan/Teamfight)
@@ -61,32 +60,21 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
       anchor: "utilities",
     },
     {
-      id: "progression",
-      label: "Progression & Plus",
-      icon: "Crown",
-      anchor: "progression",
-    },
-    {
-      id: "grinding",
-      label: "Grinding & Leveling",
-      icon: "Gamepad2",
-      anchor: "grinding",
-    },
-    {
       id: "marketplace",
-      label: "Accounts & Items",
+      label: "Marketplace",
       icon: "ShoppingBag",
       anchor: "marketplace",
     },
     {
-      id: "recovery",
-      label: "Recovery & Coaching",
-      icon: "Shield",
-      anchor: "recovery",
+      id: "learning",
+      label: "Learn",
+      icon: "GraduationCap",
+      anchor: "learning",
     },
+
   ],
 
-  // --- 4. THE CONTENT SECTIONS (The "Meat") ---
+// --- 4. THE CONTENT SECTIONS (The "Meat") ---
   sections: [
     // A. RANKED SERVICES
     {
@@ -177,45 +165,14 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
              },
           ],
         },
-        // C. DOTA PLUS & SUBSCRIPTIONS
-        {
-          id: "subscriptions",
-          anchor: "subscriptions",
-          title: "Dota Plus & Analytics",
-          description: "Regional pricing tricks to get you cheaper subs.",
-          layout: "grid_cards",
-          items: [
-            {
-              id: "dota-plus-1m",
-              title: "Dota+ (1 Month)",
-              subtitle: "Region: TR/ARG/RU",
-              price: { type: "from", value: 4.5 },
-              image:
-                "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=500",
-              tags: ["Instant"],
-              slug: "dota-plus-1m",
-            },
-            {
-              id: "dota-plus-12m",
-              title: "Dota+ (12 Months)",
-              subtitle: "Save 30% via Gifting",
-              price: { type: "from", value: 45.0 },
-              image:
-                "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500",
-              tags: ["Best Value"],
-              slug: "dota-plus-12m",
-            },
-            {
-              id: "dotabuff",
-              title: "Dotabuff Plus",
-              subtitle: "Advanced Analytics Key",
-              price: { type: "from", value: 6.0 },
-              image:
-                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500",
-              slug: "dotabuff",
-            },
-          ],
-        },
+      ],
+    },
+    {
+      id: "progression",
+      label: "Progression & Plus",
+      icon: "Crown",
+      anchor: "progression",
+    },
         // D. HERO LEVELING
         {
           id: "hero-leveling",
@@ -231,98 +188,40 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
               price: { type: "from", value: 5 },
               image:
                 "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=500",
-              slug: "hero-leveling-bronze",
             },
             {
-              id: "lvl-6-15",
-              title: "Silver Tier (6-15)",
-              subtitle: "Unlock Chat Wheels",
-              price: { type: "from", value: 50 },
+              id: "lvl-25-30",
+              title: "Grandmaster (25-30)",
+              subtitle: "The Ultimate Grind",
+              priceStart: 50,
               image:
-                "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=500",
-              slug: "hero-leveling-silver",
+                "https://images.unsplash.com/photo-1637822742076-82c736cebc51?w=500",
+              tags: ["Elite"],
             },
             {
-              id: "lvl-16-20",
-              title: "Gold Tier (16-20)",
-              subtitle: "Grandmaster Emoticons",
-              price: { type: "from", value: 2 },
+              id: "cavern-crawl",
+              title: "Cavern Crawl / Quests",
+              subtitle: "3-Star Completion",
+              priceStart: 2,
               image:
-                "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=500",
-              slug: "hero-leveling-gold",
+                "https://images.unsplash.com/photo-1616511224723-064009700935?w=500",
             },
           ],
         },
-        // E. ACCOUNTS TABLE
-        {
-          id: "accounts",
-          anchor: "accounts",
-          title: "Verified Steam Accounts",
-          description:
-            "Instant delivery accounts with high MMR or rare inventories.",
-          layout: "table_list",
-          items: [
-            {
-              id: "acc-immo-1",
-              title: "Immortal (Rank 1500)",
-              price: { type: "from", value: 250 },
-              image: "",
-              slug: "immortal-account-1",
-              meta: { MMR: "7500", Behavior: "10,000", Hours: "4500" },
-            },
-            {
-              id: "acc-divine",
-              title: "Divine 5 Smurf",
-              price: { type: "from", value: 85 },
-              image: "",
-              slug: "divine-smurf-account",
-              meta: { MMR: "5400", Behavior: "9,800", Hours: "800" },
-            },
-            {
-              id: "acc-vhs",
-              title: "VHS Ready Account",
-              price: { type: "from", value: 15 },
-              image: "",
-              slug: "vhs-ready-account",
-              meta: { MMR: "TBD", Behavior: "Normal", Hours: "100" },
-            },
-            {
-              id: "acc-old",
-              title: "2013 Vintage Acc",
-              price: { type: "from", value: 45 },
-              image: "",
-              slug: "vintage-account",
-              meta: { MMR: "3000", Inv: "Dragonclaw", Hours: "8000" },
-            },
-          ],
-        },
-        // F. ITEMS
-        {
-          id: "items",
-          anchor: "items",
-          title: "Skins & Arcanas",
-          layout: "grid_cards",
-          items: [
-            {
-              id: "item-dc",
-              title: "Dragonclaw Hook",
-              price: { type: "from", value: 150 },
-              image:
-                "https://images.unsplash.com/photo-1607982758645-c229b23c74db?w=500",
-              tags: ["Rare"],
-              slug: "dragonclaw-hook",
-            },
-            {
-              id: "item-arcana",
-              title: "Random Arcana",
-              price: { type: "from", value: 25 },
-              image:
-                "https://images.unsplash.com/photo-1533613220915-609f661a6fe1?w=500",
-              tags: ["Exclusive"],
-              slug: "random-arcana",
-            },
-          ],
-        },
+      ],
+    },
+    {
+      id: "marketplace",
+      label: "Marketplace",
+      icon: "ShoppingBag",
+      anchor: "marketplace",
+    },
+    {
+      id: "utility",
+      label: "Utility & Security",
+      icon: "Shield",
+      anchor: "utility",
+    },
         // G. LOW PRIO & VHS
         {
           id: "lpq-vhs",
@@ -340,7 +239,6 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
               image:
                 "https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=500",
               tags: ["Fast"],
-              slug: "low-priority-removal",
             },
             {
               id: "behavior",
@@ -349,20 +247,24 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
               price: { type: "from", value: 20 },
               image:
                 "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=500",
-              slug: "behavior-score-boost",
             },
             {
-              id: "vhs-unban",
-              title: "VAC/HWID Self-Unban",
-              subtitle: "DIY Solution",
-              price: { type: "from", value: 25 },
+              id: "vhs-bind",
+              title: "VHS Binding",
+              subtitle: "High Skill Bracket Fix",
+              priceStart: 10,
               image:
                 "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=500",
-              slug: "vac-hwid-self-unban",
             },
           ],
         },
-        // H. COACHING
+      ],
+    },
+    {
+      id: "academy",
+      label: "Academy",
+      icon: "GraduationCap",
+      sections: [
         {
           id: "coaching",
           anchor: "coaching",
@@ -378,7 +280,6 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
               image:
                 "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=400",
               tags: ["Rank 100"],
-              slug: "attackerclone-coach",
             },
             {
               id: "coach-2",
@@ -388,7 +289,6 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
               image:
                 "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400",
               tags: ["TI Player"],
-              slug: "supportteacher-coach",
             },
             {
               id: "coach-3",
@@ -397,49 +297,10 @@ export const DOTA_BLUEPRINT: GamePageBlueprint = {
               price: { type: "from", value: 30 },
               image:
                 "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
-              slug: "midlanegod-coach",
             },
           ],
         },
+      ],
+    },
   ],
-
-  // --- 5. THE TRUST BAR (The "Credibility") ---
-  trustBar: {
-    stats: [
-      { id: "rating", icon: "Star", value: "4.9/5", label: "Rating" },
-      { id: "orders", icon: "ShoppingBag", value: "8.4K+", label: "Orders" },
-      { id: "boosters", icon: "Users", value: "18", label: "Active Boosters" },
-      { id: "uptime", icon: "Zap", value: "99.9%", label: "Uptime" },
-    ],
-    badges: ["vpn_protected", "encrypted", "ban_guarantee", "money_back"],
-  },
-
-  // --- 6. THE SEO BLOCK (The "Authority") ---
-  seo: {
-    title: "Dota 2 Services | MMR Boost, Coaching, Accounts",
-    description:
-      "Professional Dota 2 services including MMR boosting, coaching, account sales, and more. Safe, fast, and reliable.",
-    content: `<p>Our Dota 2 services platform connects players with verified professionals who can help achieve their gaming goals.</p>`,
-    faq: [
-      {
-        question: "Is MMR boosting safe?",
-        answer: "<p>Yes, our boosters use advanced techniques to ensure your account remains safe.</p>",
-      },
-    ],
-  },
-
-  // --- 7. CROSS-SELL (The "Upsell") ---
-  crossSell: {
-    title: "Related Services",
-    items: [
-      {
-        id: "cs1",
-        slug: "cs1",
-        title: "LoL Boost",
-        subtitle: "From $10",
-        image: "/images/games/lol/boost.jpg",
-        price: { type: "from", value: 10 },
-      },
-    ],
-  },
 };

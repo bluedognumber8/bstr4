@@ -5,7 +5,7 @@ import { styled } from "next-yak";
 import { useState } from "react";
 import * as Icons from "lucide-react";
 import Link from "next/link";
-import { GamePageBlueprint, GameSection, ProductCardData } from "./types";
+import { GamePageBlueprint, GameSection, ProductCardData, PulseItem } from "./types";
 
 // --- UTILS ---
 const Icon = ({ name, className }: { name: string; className?: string }) => {
@@ -486,8 +486,8 @@ export const SectionRenderer = ({
       </Header>
 
       {/* GRID TYPE */}
-      {(section.type === "grid_cards" ||
-        section.type === "profile_carousel") && (
+      {(section.layout === "grid_cards" ||
+        section.layout === "profile_carousel") && (
         <GridWrapper>
           {section.items.map((item) => {
             const cardContent = (
@@ -504,7 +504,7 @@ export const SectionRenderer = ({
                   <CardFooter>
                     <div>
                       <span className="from">From</span>
-                      <span className="price">${item.priceStart}</span>
+                      <span className="price">${item.price.value}</span>
                     </div>
                   </CardFooter>
                 </CardContent>
@@ -523,7 +523,7 @@ export const SectionRenderer = ({
       )}
 
       {/* TABLE TYPE */}
-      {section.type === "table_list" && (
+      {section.layout === "table_list" && (
         <TableWrapper>
           <Table>
             <thead>
@@ -552,7 +552,7 @@ export const SectionRenderer = ({
                       fontWeight: 700,
                     }}
                   >
-                    ${item.priceStart}
+                    ${item.price.value}
                   </td>
                   <td style={{ textAlign: "right" }}>
                     <ActionButton>VIEW</ActionButton>
@@ -565,7 +565,7 @@ export const SectionRenderer = ({
       )}
 
       {/* BANNER TYPE */}
-      {section.type === "banner_cta" && (
+      {section.layout === "banner_cta" && (
         <div
           style={{
             height: "300px",

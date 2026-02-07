@@ -3,8 +3,8 @@
 
 import { styled } from "next-yak";
 import { MMRCalculator } from "./MMRCalculator";
-import { TrustMicroBar } from "./TrustMicroBar";
 import { TrustBadgesBar } from "@/components/product/TrustElements/TrustBadgesBar";
+import * as Icons from "lucide-react";
 import { HowItWorksSection } from "@/components/product/ContentSections/HowItWorksSection";
 import { SecurityExplainer } from "@/components/product/TrustElements/SecurityExplainer";
 import { BoostersShowcase } from "@/components/product/TrustElements/BoostersShowcase";
@@ -354,6 +354,35 @@ const SectionTitle = styled.h2`
   margin-bottom: var(--space-6);
 `;
 
+// --- TRUST MICROBAR COMPONENT ---
+
+const TrustMicroBar = () => {
+  const IconComponent = Icons.CheckCircle;
+  
+  return (
+    <TrustMicroBarWrapper>
+      <TrustMicroBarInner>
+        <TrustMicroItem>
+          <IconComponent size={14} />
+          <strong>{TRUST_STATS.completedOrders.toLocaleString()}+</strong> Orders Completed
+        </TrustMicroItem>
+        <TrustMicroItem>
+          <IconComponent size={14} />
+          <strong>{TRUST_STATS.todayOrders}</strong> Orders Today
+        </TrustMicroItem>
+        <TrustMicroItem>
+          <IconComponent size={14} />
+          <strong>&lt;{TRUST_STATS.avgStartTime}</strong> Average Start Time
+        </TrustMicroItem>
+        <TrustMicroItem>
+          <IconComponent size={14} />
+          <strong>{TRUST_STATS.onlineBoosters}</strong> Boosters Online
+        </TrustMicroItem>
+      </TrustMicroBarInner>
+    </TrustMicroBarWrapper>
+  );
+};
+
 // --- COMPONENT ---
 const PageHeader = styled.header`
   max-width: 1200px;
@@ -429,6 +458,7 @@ export const MMRBoostProductPage = ({ mode = "solo" }: Props) => {
   return (
     <PageContainer>
       {/* Trust Micro Bar */}
+      <TrustMicroBar />
 
       {/* Breadcrumbs */}
       <PageHeader>

@@ -22,14 +22,6 @@ export const dota2CalibrationProduct: ProductPageData = {
     "/images/games/dota2/products/calibration-3.jpg",
   ],
   icon: "🎯",
-  features: [
-    "80%+ Winrate",
-    "24-48hr Delivery",
-    "VPN Protected",
-    "7K+ MMR Boosters",
-    "Money Back Guarantee",
-    "Live Progress Tracking",
-  ],
   // Calculator Configuration
   calculator: {
     layout: "sidebar",

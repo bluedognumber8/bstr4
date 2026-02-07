@@ -126,6 +126,7 @@ export interface ProductMeta {
   rating?: number;
   reviewCount?: number;
   features?: string[];
+  [key: string]: string | number | boolean | string[] | undefined;
 }
 
 export interface ProductCardData {
@@ -139,6 +140,7 @@ export interface ProductCardData {
   badges?: ProductBadge[];
   urgency?: ProductUrgency;
   variant?: CardVariant;
+  tags?: string[];
 }
 
 // ============================================
@@ -149,7 +151,9 @@ export type SectionLayout =
   | "grid_cards"
   | "table_list"
   | "carousel"
-  | "featured_banner";
+  | "profile_carousel"
+  | "featured_banner"
+  | "banner_cta";
 
 export interface GridConfig {
   columns: {
@@ -214,6 +218,14 @@ export interface GameTheme {
 // COMPLETE BLUEPRINT
 // ============================================
 
+export interface PulseItem {
+  id: string;
+  icon: string;
+  value: string;
+  label: string;
+  trend?: string;
+}
+
 export interface GamePageBlueprint {
   // Identifiers
   gameSlug: string;
@@ -227,6 +239,9 @@ export interface GamePageBlueprint {
 
   // Zone 1
   hero: HeroConfig;
+
+  // Zone 1.5 - Pulse Bar
+  pulse?: PulseItem[];
 
   // Zone 2
   tabs: CategoryTab[];

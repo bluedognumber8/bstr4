@@ -2,6 +2,7 @@ import { GamePageBlueprint } from "@/components/engine/types";
 
 export const WOW_RETAIL_BLUEPRINT: GamePageBlueprint = {
   gameSlug: "wow-retail", // Distinct slug
+  gameName: "World of Warcraft Retail",
   theme: {
     primaryColor: "#0074e0", // Alliance Blue / Retail Polish
     backgroundImage:
@@ -48,315 +49,392 @@ export const WOW_RETAIL_BLUEPRINT: GamePageBlueprint = {
       id: "pve",
       label: "Raids & Mythic+",
       icon: "Sword",
-      sections: [
-        {
-          id: "mythic-plus",
-          title: "Dungeons & Keystones",
-          description: "4,276 Active Listings for M+ Boosts.",
-          type: "grid_cards",
-          items: [
-            {
-              id: "m-low",
-              title: "Weekly Vault (+8)",
-              subtitle: "Guaranteed Gear",
-              priceStart: 8,
-              image:
-                "https://images.unsplash.com/photo-1627856014759-2a57d83be60c?w=500",
-            },
-            {
-              id: "m-ksm",
-              title: "Keystone Master (2000 IO)",
-              subtitle: "Mount Reward",
-              priceStart: 120,
-              image:
-                "https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=500",
-              tags: ["Mount"],
-            },
-            {
-              id: "m-push",
-              title: "High Keys (+15-20)",
-              subtitle: "For IO Score",
-              priceStart: 25,
-              image:
-                "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500",
-              tags: ["Pro"],
-            },
-          ],
-        },
-        {
-          id: "raids",
-          title: "Nerub-ar Palace",
-          description: "Full clears, VIP Loot Funnels, and Glory Runs.",
-          type: "grid_cards",
-          items: [
-            {
-              id: "raid-heroic",
-              title: "Heroic Full Clear",
-              subtitle: "AOTC Achievement",
-              priceStart: 25,
-              image:
-                "https://images.unsplash.com/photo-1615751072497-5f5169febe17?w=500",
-            },
-            {
-              id: "raid-mythic",
-              title: "Mythic Bosses",
-              subtitle: "BiS Item Funnel",
-              priceStart: 40,
-              image:
-                "https://images.unsplash.com/photo-1626263017299-89a42c849383?w=500",
-              tags: ["Elite"],
-            },
-            {
-              id: "raid-mount",
-              title: "Mount Guarantee",
-              subtitle: "Rare Drop",
-              priceStart: 150,
-              image:
-                "https://images.unsplash.com/photo-1535581652167-3d6b9add9b32?w=500",
-            },
-          ],
-        },
-        {
-          id: "delves",
-          title: "Delves & World Content",
-          description: "New TWW Content Runs.",
-          type: "grid_cards",
-          items: [
-            {
-              id: "delve-t8",
-              title: "Tier 8 Delve",
-              subtitle: "Great Vault Reward",
-              priceStart: 6,
-              image:
-                "https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=500",
-            },
-            {
-              id: "delve-full",
-              title: "Full Tier Unlock",
-              subtitle: "Tiers 1-11",
-              priceStart: 60,
-              image:
-                "https://images.unsplash.com/photo-1478720568477-152d9b164e63?w=500",
-            },
-          ],
-        },
-      ],
+      anchor: "pve",
     },
     // TAB 2: PROGRESSION (Leveling, Profs, Remix)
     {
       id: "progression",
       label: "Progression",
       icon: "ChevronsUp",
-      sections: [
-        {
-          id: "leveling",
-          title: "Power Leveling (1-80)",
-          type: "grid_cards",
-          items: [
-            {
-              id: "lvl-70-80",
-              title: "70-80 TWW",
-              subtitle: "12-24 Hours",
-              priceStart: 15,
-              image:
-                "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=500",
-              tags: ["Hot"],
-            },
-            {
-              id: "lvl-full",
-              title: "Fresh 1-80",
-              subtitle: "Full Campaign",
-              priceStart: 35,
-              image:
-                "https://images.unsplash.com/photo-1642470015600-28323317564a?w=500",
-            },
-            {
-              id: "remix-lvl",
-              title: "Legion Remix Leveling",
-              subtitle: "Time-Limited Event",
-              priceStart: 18,
-              image:
-                "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=500",
-              tags: ["Event"],
-            },
-          ],
-        },
-        {
-          id: "professions",
-          title: "Professions & Reputation",
-          type: "grid_cards",
-          items: [
-            {
-              id: "prof-blacksmith",
-              title: "Blacksmithing 1-100",
-              subtitle: "Khaz Algar",
-              priceStart: 12,
-              image:
-                "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500",
-            },
-            {
-              id: "prof-all",
-              title: "All Professions Max",
-              subtitle: "Bundle",
-              priceStart: 120,
-              image:
-                "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500",
-            },
-            {
-              id: "rep-farm",
-              title: "Renown 25",
-              subtitle: "Any Faction",
-              priceStart: 50,
-              image:
-                "https://images.unsplash.com/photo-1596496312467-0c098559882c?w=500",
-            },
-          ],
-        },
-      ],
+      anchor: "progression",
     },
     // TAB 3: PVP (Arena, Shuffle)
     {
       id: "pvp",
       label: "PvP Arena",
       icon: "Swords",
-      sections: [
-        {
-          id: "arena-services",
-          title: "Gladiator & Rating",
-          type: "grid_cards",
-          items: [
-            {
-              id: "shuffle",
-              title: "Solo Shuffle 1800",
-              subtitle: "Elite Set",
-              priceStart: 30,
-              image:
-                "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500",
-            },
-            {
-              id: "arena-3v3",
-              title: "3v3 Gladiator",
-              subtitle: "Mount + Title",
-              priceStart: 400,
-              image:
-                "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=500",
-              tags: ["Hardcore"],
-            },
-            {
-              id: "honor",
-              title: "Honor Farming",
-              subtitle: "Full Gear Set",
-              priceStart: 10,
-              image:
-                "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=500",
-            },
-          ],
-        },
-      ],
+      anchor: "pvp",
     },
     // TAB 4: MARKETPLACE (Accounts, Keys, Time)
     {
       id: "market",
       label: "Marketplace",
       icon: "ShoppingBag",
-      sections: [
-        {
-          id: "accounts",
-          title: "High-End Accounts",
-          description: "Glad mounts, T3 sets, and High IO Characters.",
-          type: "table_list",
-          items: [
-            {
-              id: "acc-glad",
-              title: "S1 Gladiator Paladin",
-              priceStart: 550,
-              image: "",
-              meta: {
-                Ilvl: "626",
-                Mounts: "Highland Drake",
-                Title: "Gladiator",
-              },
-            },
-            {
-              id: "acc-shell",
-              title: "Spectral Tiger Shell",
-              priceStart: 1500,
-              image: "",
-              meta: { Rare: "Spectral Tiger", Gold: "10M", Chars: "Lvl 1" },
-            },
-            {
-              id: "acc-mid",
-              title: "Mythic Raider Priest",
-              priceStart: 200,
-              image: "",
-              meta: { Ilvl: "620", IO: "2800", Raid: "8/8 M" },
-            },
-          ],
-        },
-        {
-          id: "keys-items",
-          title: "Keys & Game Time",
-          type: "grid_cards",
-          items: [
-            {
-              id: "key-15",
-              title: "Mythic +15 Key",
-              subtitle: "Inventory Item",
-              priceStart: 4,
-              image:
-                "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=500",
-            },
-            {
-              id: "gametime-60",
-              title: "60 Days Time Card",
-              subtitle: "RU/EU/US",
-              priceStart: 25,
-              image:
-                "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500",
-            },
-            {
-              id: "gold-cap",
-              title: "Gold Cap (10M)",
-              subtitle: "Safe Transfer",
-              priceStart: 450,
-              image:
-                "https://images.unsplash.com/photo-1624138784181-dc7f5b75e52e?w=500",
-            },
-          ],
-        },
-      ],
+      anchor: "market",
     },
     // TAB 5: COACHING (Academy)
     {
       id: "coaching",
       label: "Coaching",
       icon: "GraduationCap",
-      sections: [
+      anchor: "coaching",
+    },
+  ],
+
+  sections: [
+    // MYTHIC+ AND RAID SECTION
+    {
+      id: "mythic-plus",
+      anchor: "mythic-plus",
+      title: "Dungeons & Keystones",
+      description: "4,276 Active Listings for M+ Boosts.",
+      layout: "grid_cards",
+      items: [
         {
-          id: "coaches",
-          title: "Learn from BlizzCon Winners",
-          type: "profile_carousel",
-          items: [
-            {
-              id: "coach-1",
-              title: "R1 Rogue",
-              subtitle: "AWC Competitor",
-              priceStart: 50,
-              image:
-                "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=400",
-              tags: ["Pro"],
-            },
-            {
-              id: "coach-2",
-              title: "MDI Tank",
-              subtitle: "Route Planning",
-              priceStart: 35,
-              image:
-                "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400",
-            },
-          ],
+          id: "m-low",
+          title: "Weekly Vault (+8)",
+          subtitle: "Guaranteed Gear",
+          price: { type: "from", value: 8 },
+          image:
+            "https://images.unsplash.com/photo-1627856014759-2a57d83be60c?w=500",
+          slug: "m-low",
+        },
+        {
+          id: "m-ksm",
+          title: "Keystone Master (2000 IO)",
+          subtitle: "Mount Reward",
+          price: { type: "from", value: 120 },
+          image:
+            "https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=500",
+          tags: ["Mount"],
+          slug: "m-ksm",
+        },
+        {
+          id: "m-push",
+          title: "High Keys (+15-20)",
+          subtitle: "For IO Score",
+          price: { type: "from", value: 25 },
+          image:
+            "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500",
+          tags: ["Pro"],
+          slug: "m-push",
+        },
+      ],
+    },
+    {
+      id: "raids",
+      anchor: "raids",
+      title: "Nerub-ar Palace",
+      description: "Full clears, VIP Loot Funnels, and Glory Runs.",
+      layout: "grid_cards",
+      items: [
+        {
+          id: "raid-heroic",
+          title: "Heroic Full Clear",
+          subtitle: "AOTC Achievement",
+          price: { type: "from", value: 25 },
+          image:
+            "https://images.unsplash.com/photo-1615751072497-5f5169febe17?w=500",
+          slug: "raid-heroic",
+        },
+        {
+          id: "raid-mythic",
+          title: "Mythic Bosses",
+          subtitle: "BiS Item Funnel",
+          price: { type: "from", value: 40 },
+          image:
+            "https://images.unsplash.com/photo-1626263017299-89a42c849383?w=500",
+          tags: ["Elite"],
+          slug: "raid-mythic",
+        },
+        {
+          id: "raid-mount",
+          title: "Mount Guarantee",
+          subtitle: "Rare Drop",
+          price: { type: "from", value: 150 },
+          image:
+            "https://images.unsplash.com/photo-1535581652167-3d6b9add9b32?w=500",
+          slug: "raid-mount",
+        },
+      ],
+    },
+    {
+      id: "delves",
+      anchor: "delves",
+      title: "Delves & World Content",
+      description: "New TWW Content Runs.",
+      layout: "grid_cards",
+      items: [
+        {
+          id: "delve-t8",
+          title: "Tier 8 Delve",
+          subtitle: "Great Vault Reward",
+          price: { type: "from", value: 6 },
+          image:
+            "https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=500",
+          slug: "delve-t8",
+        },
+        {
+          id: "delve-full",
+          title: "Full Tier Unlock",
+          subtitle: "Tiers 1-11",
+          price: { type: "from", value: 60 },
+          image:
+            "https://images.unsplash.com/photo-1478720568477-152d9b164e63?w=500",
+          slug: "delve-full",
+        },
+      ],
+    },
+    // PROGRESSION SECTION
+    {
+      id: "leveling",
+      anchor: "leveling",
+      title: "Power Leveling (1-80)",
+      layout: "grid_cards",
+      items: [
+        {
+          id: "lvl-70-80",
+          title: "70-80 TWW",
+          subtitle: "12-24 Hours",
+          price: { type: "from", value: 15 },
+          image:
+            "https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=500",
+          tags: ["Hot"],
+          slug: "lvl-70-80",
+        },
+        {
+          id: "lvl-full",
+          title: "Fresh 1-80",
+          subtitle: "Full Campaign",
+          price: { type: "from", value: 35 },
+          image:
+            "https://images.unsplash.com/photo-1642470015600-28323317564a?w=500",
+          slug: "lvl-full",
+        },
+        {
+          id: "remix-lvl",
+          title: "Legion Remix Leveling",
+          subtitle: "Time-Limited Event",
+          price: { type: "from", value: 18 },
+          image:
+            "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?w=500",
+          tags: ["Event"],
+          slug: "remix-lvl",
+        },
+      ],
+    },
+    {
+      id: "professions",
+      anchor: "professions",
+      title: "Professions & Reputation",
+      layout: "grid_cards",
+      items: [
+        {
+          id: "prof-blacksmith",
+          title: "Blacksmithing 1-100",
+          subtitle: "Khaz Algar",
+          price: { type: "from", value: 12 },
+          image:
+            "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500",
+          slug: "prof-blacksmith",
+        },
+        {
+          id: "prof-all",
+          title: "All Professions Max",
+          subtitle: "Bundle",
+          price: { type: "from", value: 120 },
+          image:
+            "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500",
+          slug: "prof-all",
+        },
+        {
+          id: "rep-farm",
+          title: "Renown 25",
+          subtitle: "Any Faction",
+          price: { type: "from", value: 50 },
+          image:
+            "https://images.unsplash.com/photo-1596496312467-0c098559882c?w=500",
+          slug: "rep-farm",
+        },
+      ],
+    },
+    // PVP SECTION
+    {
+      id: "arena-services",
+      anchor: "arena-services",
+      title: "Gladiator & Rating",
+      layout: "grid_cards",
+      items: [
+        {
+          id: "shuffle",
+          title: "Solo Shuffle 1800",
+          subtitle: "Elite Set",
+          price: { type: "from", value: 30 },
+          image:
+            "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500",
+          slug: "shuffle",
+        },
+        {
+          id: "arena-3v3",
+          title: "3v3 Gladiator",
+          subtitle: "Mount + Title",
+          price: { type: "from", value: 400 },
+          image:
+            "https://images.unsplash.com/photo-1560419015-7c427e8ae5ba?w=500",
+          tags: ["Hardcore"],
+          slug: "arena-3v3",
+        },
+        {
+          id: "honor",
+          title: "Honor Farming",
+          subtitle: "Full Gear Set",
+          price: { type: "from", value: 10 },
+          image:
+            "https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=500",
+          slug: "honor",
+        },
+      ],
+    },
+    // MARKETPLACE SECTION
+    {
+      id: "accounts",
+      anchor: "accounts",
+      title: "High-End Accounts",
+      description: "Glad mounts, T3 sets, and High IO Characters.",
+      layout: "table_list",
+      items: [
+        {
+          id: "acc-glad",
+          title: "S1 Gladiator Paladin",
+          price: { type: "from", value: 550 },
+          image: "",
+          meta: {
+            Ilvl: "626",
+            Mounts: "Highland Drake",
+            Title: "Gladiator",
+          },
+          slug: "acc-glad",
+        },
+        {
+          id: "acc-shell",
+          title: "Spectral Tiger Shell",
+          price: { type: "from", value: 1500 },
+          image: "",
+          meta: { Rare: "Spectral Tiger", Gold: "10M", Chars: "Lvl 1" },
+          slug: "acc-shell",
+        },
+        {
+          id: "acc-mid",
+          title: "Mythic Raider Priest",
+          price: { type: "from", value: 200 },
+          image: "",
+          meta: { Ilvl: "620", IO: "2800", Raid: "8/8 M" },
+          slug: "acc-mid",
+        },
+      ],
+    },
+    {
+      id: "keys-items",
+      anchor: "keys-items",
+      title: "Keys & Game Time",
+      layout: "grid_cards",
+      items: [
+        {
+          id: "key-15",
+          title: "Mythic +15 Key",
+          subtitle: "Inventory Item",
+          price: { type: "from", value: 4 },
+          image:
+            "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=500",
+          slug: "key-15",
+        },
+        {
+          id: "gametime-60",
+          title: "60 Days Time Card",
+          subtitle: "RU/EU/US",
+          price: { type: "from", value: 25 },
+          image:
+            "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500",
+          slug: "gametime-60",
+        },
+        {
+          id: "gold-cap",
+          title: "Gold Cap (10M)",
+          subtitle: "Safe Transfer",
+          price: { type: "from", value: 450 },
+          image:
+            "https://images.unsplash.com/photo-1624138784181-dc7f5b75e52e?w=500",
+          slug: "gold-cap",
+        },
+      ],
+    },
+    // COACHING SECTION
+    {
+      id: "coaches",
+      anchor: "coaches",
+      title: "Learn from BlizzCon Winners",
+      layout: "profile_carousel",
+      items: [
+        {
+          id: "coach-1",
+          title: "R1 Rogue",
+          subtitle: "AWC Competitor",
+          price: { type: "from", value: 50 },
+          image:
+            "https://images.unsplash.com/photo-1566577739112-5180d4bf9390?w=400",
+          tags: ["Pro"],
+          slug: "coach-1",
+        },
+        {
+          id: "coach-2",
+          title: "MDI Tank",
+          subtitle: "Route Planning",
+          price: { type: "from", value: 35 },
+          image:
+            "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400",
+          slug: "coach-2",
         },
       ],
     },
   ],
+
+  // --- 5. THE TRUST BAR (The "Credibility") ---
+  trustBar: {
+    stats: [
+      { id: "rating", icon: "Star", value: "4.9/5", label: "Rating" },
+      { id: "orders", icon: "ShoppingBag", value: "8.4K+", label: "Orders" },
+      { id: "boosters", icon: "Users", value: "18", label: "Active Boosters" },
+      { id: "uptime", icon: "Zap", value: "99.9%", label: "Uptime" },
+    ],
+    badges: ["vpn_protected", "encrypted", "ban_guarantee", "money_back"],
+  },
+
+  // --- 6. THE SEO BLOCK (The "Authority") ---
+  seo: {
+    title: "WoW Retail Services | Leveling, Raids, PvP",
+    description:
+      "Professional World of Warcraft Retail services including leveling, raids, PvP, and more. Safe, fast, and reliable.",
+    content: `<p>Our WoW Retail services platform connects players with verified professionals who can help achieve their gaming goals.</p>`,
+    faq: [
+      {
+        question: "Is character boosting safe?",
+        answer: "<p>Yes, our boosters use advanced techniques to ensure your character remains safe.</p>",
+      },
+    ],
+  },
+
+  // --- 7. CROSS-SELL (The "Upsell") ---
+  crossSell: {
+    title: "Related Services",
+    items: [
+      {
+        id: "cs-wow-retail",
+        slug: "cs-wow-retail",
+        title: "WoW Classic Boost",
+        subtitle: "From $10",
+        image: "/images/games/wow/boost.jpg",
+        price: { type: "from", value: 10 },
+      },
+    ],
+  },
 };
