@@ -1,6 +1,8 @@
 //apps/web/src/components/features/Calculators/dota/MMRCalculator.tsx
 "use client";
-
+interface MMRCalculatorProps {
+  defaultMode?: "solo" | "duo";
+}
 import { styled, css } from "next-yak";
 import { useState, useEffect, useMemo } from "react";
 import Slider from "rc-slider";
@@ -461,18 +463,19 @@ const MobileBottomBar = styled.div`
 
 // --- MAIN COMPONENT ---
 
-export const MMRCalculator = () => {
+export const MMRCalculator = ({ defaultMode = "solo" }: MMRCalculatorProps) => {
   // 1. STATE
+  //
+  const [addons, setAddons] = useState({
+    stream: false,
+    express: false,
+    duo: defaultMode === "duo",
+  });
   const [mmr, setMmr] = useState([2000, 4000]);
   const [behavior, setBehavior] = useState(10000);
   const [rankConfidence, setRankConfidence] = useState(100);
   const [hasLP, setHasLP] = useState(false);
   const [lpGames, setLpGames] = useState(1);
-  const [addons, setAddons] = useState({
-    stream: false,
-    express: false,
-    duo: false,
-  });
 
   // Heroes State
   const [selectedHeroes, setSelectedHeroes] = useState<number[]>([]);

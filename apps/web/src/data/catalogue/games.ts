@@ -43,17 +43,17 @@ export const CATALOGUE_GAMES: CatalogueGame[] = [
     hasBlueprint: false,
   },
   {
-    id: "diablo4",
-    name: "Diablo 4",
-    slug: "diablo-4",
-    shortName: "D4",
-    icon: "/images/games/diablo4/icon.png",
-    coverImage: "/images/games/diablo4/cover.jpg",
-    primaryColor: "#c41230",
+    id: "dota2",
+    name: "Dota 2",
+    slug: "dota-2",
+    shortName: "Dota",
+    icon: "/images/games/dota2/icon.png",
+    coverImage: "/images/games/dota2/cover.jpg",
+    primaryColor: "#c23c2a",
     isActive: true,
-    isFeatured: false,
-    displayOrder: 4,
-    hasBlueprint: false,
+    isFeatured: true, // Make it featured now that we have blueprint
+    displayOrder: 3,
+    hasBlueprint: true, // Now true!
   },
   {
     id: "dota2",
